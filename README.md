@@ -22,6 +22,7 @@ An AI-powered analytics dashboard for small businesses and creators that provide
 - **Authentication**: NextAuth.js
 - **AI**: OpenAI GPT-4
 - **Charts**: Recharts
+- **File Upload**: UploadThing (Free tier for MVP)
 - **File Parsing**: PapaParse
 - **PDF Export**: jsPDF
 - **Payments**: Stripe
@@ -35,6 +36,7 @@ An AI-powered analytics dashboard for small businesses and creators that provide
 - PostgreSQL database (Supabase recommended)
 - Stripe account
 - OpenAI API key
+- UploadThing account (free tier)
 
 ### Installation
 
@@ -52,14 +54,19 @@ Copy `.env.example` to `.env` and fill in your values:
 cp .env.example .env
 ```
 
-3. Set up the database:
+3. Set up UploadThing:
+   - Sign up at https://uploadthing.com
+   - Create a new app
+   - Copy your App ID and Secret to `.env`
+
+4. Set up the database:
 
 ```bash
 npx prisma generate
 npx prisma db push
 ```
 
-4. Run the development server:
+5. Run the development server:
 
 ```bash
 npm run dev
@@ -79,6 +86,7 @@ ai-dashboards-saas/
 ├── components/            # React components
 │   ├── ui/               # shadcn/ui components
 │   ├── charts/           # Chart components
+│   ├── upload/           # File upload components
 │   └── layout/           # Layout components
 ├── lib/                  # Utility functions
 │   ├── prisma.ts        # Prisma client
