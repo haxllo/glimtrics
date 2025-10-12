@@ -3,7 +3,7 @@
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-const COLORS = ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#06b6d4', '#6366f1', '#f97316'];
+const COLORS = ['#10b981', '#22c55e', '#34d399', '#6ee7b7', '#86efac', '#a7f3d0', '#059669', '#047857'];
 
 interface DataChartProps {
   data: Array<{ name: string; value: number; [key: string]: string | number }>;
@@ -53,7 +53,7 @@ export function DataChart({
               <YAxis style={{ fontSize: '12px' }} />
               <Tooltip />
               <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} iconSize={10} />
-              <Line type="monotone" dataKey={dataKey} stroke="#3b82f6" strokeWidth={2} />
+              <Line type="monotone" dataKey={dataKey} stroke="#10b981" strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
         )}
@@ -66,7 +66,7 @@ export function DataChart({
               <YAxis style={{ fontSize: '12px' }} />
               <Tooltip />
               <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} iconSize={10} />
-              <Bar dataKey={dataKey} fill="#3b82f6" />
+              <Bar dataKey={dataKey} fill="#10b981" />
             </BarChart>
           </ResponsiveContainer>
         )}
@@ -79,7 +79,7 @@ export function DataChart({
               <YAxis style={{ fontSize: '12px' }} />
               <Tooltip />
               <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} iconSize={10} />
-              <Area type="monotone" dataKey={dataKey} stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.6} />
+              <Area type="monotone" dataKey={dataKey} stroke="#10b981" fill="#10b981" fillOpacity={0.6} />
             </AreaChart>
           </ResponsiveContainer>
         )}

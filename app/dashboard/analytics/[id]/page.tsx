@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { use } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, FileDown, Download } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 import { DashboardData } from "@/types/dashboard";
 import { analyzeData, filterData, calculateTrend, type AnalyticsData } from "@/lib/analytics";
 import { DataChart } from "@/components/charts/DataChart";
@@ -14,8 +15,9 @@ import { StatsSummary } from "@/components/analytics/StatsSummary";
 import { DataFilters, type FilterState } from "@/components/analytics/DataFilters";
 import { InsightsSection } from "@/components/insights/InsightsSection";
 import { AIAssistant } from "@/components/insights/AIAssistant";
-import { FileDown } from "lucide-react";
+import { AnalyticsSkeleton } from "@/components/analytics/AnalyticsSkeleton";
 import { exportAnalyticsToPDF, exportInsightsToPDF } from "@/lib/pdf-export";
+import { exportToCSV, exportStatisticsToCSV } from "@/lib/csv-export";
 
 interface Dashboard {
   id: string;
@@ -90,13 +92,13 @@ export default function AnalyticsPage({
     fetchDashboard();
   }, [resolvedParams.id, router]);
 
-  const handleFilterChange = (filters: FilterState) => {
+  const handleFilterChange = useCallback((filters: FilterState) => {
     if (!dashboard) return;
 
     const dashboardData = dashboard.data as unknown as DashboardData;
     const filtered = filterData(dashboardData.rows, filters);
     setFilteredData(filtered);
-  };
+  }, [dashboard]);
 
   const handleExportPDF = async () => {
     if (!dashboard || !analytics) return;
@@ -112,9 +114,10 @@ export default function AnalyticsPage({
         })),
         statistics: analytics.statistics,
       });
+      toast.success("PDF exported successfully");
     } catch (error) {
       console.error('PDF export error:', error);
-      alert('Failed to export PDF. Please try again.');
+      toast.error("Failed to export PDF");
     }
   };
 
@@ -130,27 +133,50 @@ export default function AnalyticsPage({
         })),
         dashboard.name
       );
+      toast.success("Insights exported successfully");
     } catch (error) {
       console.error('PDF export error:', error);
-      alert('Failed to export PDF. Please try again.');
+      toast.error("Failed to export PDF");
+    }
+  };
+
+  const handleExportCSV = () => {
+    if (!dashboard) return;
+
+    try {
+      const dashboardData = dashboard.data as unknown as DashboardData;
+      exportToCSV(filteredData, `${dashboard.name}-data-${Date.now()}.csv`);
+      toast.success("CSV exported successfully");
+    } catch (error) {
+      console.error('CSV export error:', error);
+      toast.error("Failed to export CSV");
+    }
+  };
+
+  const handleExportStatisticsCSV = () => {
+    if (!analytics) return;
+
+    try {
+      exportStatisticsToCSV(analytics.statistics, `${dashboard?.name}-statistics-${Date.now()}.csv`);
+      toast.success("Statistics exported successfully");
+    } catch (error) {
+      console.error('CSV export error:', error);
+      toast.error("Failed to export statistics");
     }
   };
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-96">
-        <div className="text-center">
-          <p className="text-gray-600">Loading analytics...</p>
-        </div>
-      </div>
-    );
+    return <AnalyticsSkeleton />;
   }
 
   if (!dashboard || !analytics) {
     return (
       <div className="flex items-center justify-center h-96">
         <div className="text-center">
-          <p className="text-gray-600">Dashboard not found</p>
+          <p className="text-gray-400">Dashboard not found</p>
+          <Link href="/dashboard/datasets">
+            <Button className="mt-4">Back to Datasets</Button>
+          </Link>
         </div>
       </div>
     );
@@ -168,21 +194,29 @@ export default function AnalyticsPage({
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl font-bold">Analytics: {dashboard.name}</h1>
-            <p className="text-gray-500 mt-1">
+            <h1 className="text-3xl font-bold text-white">Analytics: {dashboard.name}</h1>
+            <p className="text-gray-400 mt-1">
               {filteredData.length} rows • {dashboardData.headers.length} columns
             </p>
           </div>
         </div>
-        <div className="flex space-x-2">
-          <Button onClick={handleExportPDF} variant="outline">
+        <div className="flex flex-wrap gap-2">
+          <Button onClick={handleExportCSV} variant="outline" size="sm">
+            <Download className="h-4 w-4 mr-2" />
+            Export CSV
+          </Button>
+          <Button onClick={handleExportStatisticsCSV} variant="outline" size="sm">
+            <Download className="h-4 w-4 mr-2" />
+            Export Stats
+          </Button>
+          <Button onClick={handleExportPDF} variant="outline" size="sm">
             <FileDown className="h-4 w-4 mr-2" />
-            Export Full PDF
+            PDF Full
           </Button>
           {insights.length > 0 && (
-            <Button onClick={handleExportInsightsPDF} variant="outline">
+            <Button onClick={handleExportInsightsPDF} variant="outline" size="sm">
               <FileDown className="h-4 w-4 mr-2" />
-              Export Insights
+              PDF Insights
             </Button>
           )}
         </div>

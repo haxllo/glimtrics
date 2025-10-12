@@ -3,7 +3,7 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-const COLORS = ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#06b6d4'];
+const COLORS = ['#10b981', '#22c55e', '#34d399', '#6ee7b7', '#86efac', '#a7f3d0'];
 
 interface MultiLineChartProps {
   data: Array<Record<string, string | number>>;
