@@ -1,4 +1,5 @@
 import jsPDF from 'jspdf';
+import { getCurrentDateForFilename, sanitizeFilename } from './utils-date';
 import html2canvas from 'html2canvas';
 
 export interface PDFExportOptions {
@@ -206,5 +207,7 @@ export async function exportInsightsToPDF(
     yPosition += splitDescription.length * 5 + 10;
   });
 
-  pdf.save(`${datasetName}-insights-${Date.now()}.pdf`);
+  const sanitizedName = sanitizeFilename(datasetName);
+  const dateStr = getCurrentDateForFilename();
+  pdf.save(`${sanitizedName}-insights-${dateStr}.pdf`);
 }

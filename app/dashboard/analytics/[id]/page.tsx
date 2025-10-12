@@ -18,6 +18,7 @@ import { AIAssistant } from "@/components/insights/AIAssistant";
 import { AnalyticsSkeleton } from "@/components/analytics/AnalyticsSkeleton";
 import { exportAnalyticsToPDF, exportInsightsToPDF } from "@/lib/pdf-export";
 import { exportToCSV, exportStatisticsToCSV } from "@/lib/csv-export";
+import { getCurrentDateForFilename, sanitizeFilename } from "@/lib/utils-date";
 
 interface Dashboard {
   id: string;
@@ -105,7 +106,7 @@ export default function AnalyticsPage({
 
     try {
       await exportAnalyticsToPDF('analytics-container', {
-        filename: `${dashboard.name}-analytics-${Date.now()}.pdf`,
+        filename: `${sanitizeFilename(dashboard.name)}-analytics-${getCurrentDateForFilename()}.pdf`,
         datasetName: dashboard.name,
         insights: insights.map(i => ({
           type: i.type,
@@ -145,7 +146,7 @@ export default function AnalyticsPage({
 
     try {
       const dashboardData = dashboard.data as unknown as DashboardData;
-      exportToCSV(filteredData, `${dashboard.name}-data-${Date.now()}.csv`);
+      exportToCSV(filteredData, `${sanitizeFilename(dashboard.name)}-data-${getCurrentDateForFilename()}.csv`);
       toast.success("CSV exported successfully");
     } catch (error) {
       console.error('CSV export error:', error);
@@ -157,7 +158,7 @@ export default function AnalyticsPage({
     if (!analytics) return;
 
     try {
-      exportStatisticsToCSV(analytics.statistics, `${dashboard?.name}-statistics-${Date.now()}.csv`);
+      exportStatisticsToCSV(analytics.statistics, `${sanitizeFilename(dashboard?.name || 'statistics')}-statistics-${getCurrentDateForFilename()}.csv`);
       toast.success("Statistics exported successfully");
     } catch (error) {
       console.error('CSV export error:', error);
