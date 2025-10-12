@@ -12,11 +12,21 @@ import { DataChart } from "@/components/charts/DataChart";
 import { MultiLineChart } from "@/components/charts/MultiLineChart";
 import { StatsSummary } from "@/components/analytics/StatsSummary";
 import { DataFilters, type FilterState } from "@/components/analytics/DataFilters";
+import { InsightsSection } from "@/components/insights/InsightsSection";
+import { AIAssistant } from "@/components/insights/AIAssistant";
 
 interface Dashboard {
   id: string;
   name: string;
   data: unknown;
+}
+
+interface Insight {
+  id: string;
+  type: string;
+  title: string;
+  description: string;
+  createdAt: Date;
 }
 
 export default function AnalyticsPage({ 
@@ -31,6 +41,7 @@ export default function AnalyticsPage({
   const [filteredData, setFilteredData] = useState<Record<string, unknown>[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [trends, setTrends] = useState<{ [key: string]: 'increasing' | 'decreasing' | 'stable' }>({});
+  const [insights, setInsights] = useState<Insight[]>([]);
 
   useEffect(() => {
     async function fetchDashboard() {
@@ -59,6 +70,13 @@ export default function AnalyticsPage({
           trendsData[col] = calculateTrend(values);
         });
         setTrends(trendsData);
+
+        // Fetch existing insights
+        const insightsResponse = await fetch(`/api/insights/${resolvedParams.id}`);
+        if (insightsResponse.ok) {
+          const insightsData = await insightsResponse.json();
+          setInsights(insightsData.insights || []);
+        }
       } catch (error) {
         console.error("Failed to fetch dashboard:", error);
         router.push("/dashboard/datasets");
@@ -116,6 +134,10 @@ export default function AnalyticsPage({
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="mb-8">
+        <InsightsSection dashboardId={resolvedParams.id} initialInsights={insights} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -194,6 +216,9 @@ export default function AnalyticsPage({
           )}
         </div>
       </div>
+
+      {/* AI Assistant Floating Button */}
+      <AIAssistant dashboardId={resolvedParams.id} datasetName={dashboard.name} />
     </div>
   );
 }

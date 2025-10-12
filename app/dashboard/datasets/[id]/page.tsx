@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Link from "next/link";
-import { ArrowLeft, Download, TrendingUp, BarChart3 } from "lucide-react";
+import { ArrowLeft, Download, BarChart3 } from "lucide-react";
 import { DashboardData } from "@/types/dashboard";
 
 export default async function DatasetDetailPage({ 
