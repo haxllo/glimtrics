@@ -1,39 +1,42 @@
 import { Variants } from 'framer-motion';
 
-// Smooth easing curves (like Insightify)
+// Smooth easing - Vercel/Insightify style
 const smoothEase = [0.25, 0.1, 0.25, 1] as const;
 
+// SNAPPY FADE IN - Short duration for responsiveness
 export const fadeIn: Variants = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 12 },
   animate: { 
     opacity: 1, 
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.4,
       ease: smoothEase,
     }
   },
-  exit: { opacity: 0, y: -20 },
+  exit: { opacity: 0, y: -12 },
 };
 
+// SNAPPY FADE UP - Reduced from 60px to 30px, faster
 export const fadeInUp: Variants = {
-  initial: { opacity: 0, y: 60 },
+  initial: { opacity: 0, y: 30 },
   animate: { 
     opacity: 1, 
     y: 0,
     transition: {
-      duration: 0.8,
+      duration: 0.5,
       ease: smoothEase,
     }
   },
 };
 
+// MINIMAL STAGGER - Subtle, fast
 export const staggerContainer: Variants = {
   initial: {},
   animate: {
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
+      staggerChildren: 0.08,
+      delayChildren: 0,
     },
   },
 };
@@ -74,30 +77,56 @@ export const cardHover: Variants = {
   },
 };
 
-// Feature card animation (combines fade in + hover) - GPU optimized
+// FEATURE CARD - Snappy entrance + smooth hover
 export const featureCard: Variants = {
   initial: { 
     opacity: 0, 
-    y: 20,
-    scale: 1,
+    y: 16,
+    scale: 0.98,
   },
   animate: { 
     opacity: 1, 
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.6,
+      duration: 0.4,
       ease: smoothEase,
     }
   },
   whileHover: { 
-    scale: 1.03,
-    y: -6,
+    scale: 1.02,
+    y: -4,
     transition: {
-      type: "spring",
-      stiffness: 400,
-      damping: 17,
+      duration: 0.2,
+      ease: smoothEase,
     },
+  },
+};
+
+// SECTION CONTAINER - For scroll-triggered sections
+export const sectionContainer: Variants = {
+  initial: { opacity: 0, y: 24 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: smoothEase,
+    }
+  },
+};
+
+// USE CASE CARD - Minimal, fast
+export const useCaseCard: Variants = {
+  initial: { opacity: 0, y: 12, scale: 0.98 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.4,
+      ease: smoothEase,
+    }
   },
 };
 

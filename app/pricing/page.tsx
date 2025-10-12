@@ -9,7 +9,7 @@ import { Check, Loader2, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { initializePaddle, Paddle } from '@paddle/paddle-js';
 import { motion } from "framer-motion";
-import { fadeIn } from "@/lib/animations";
+import { staggerContainer, useCaseCard } from "@/lib/animations";
 
 const plans = [
   {
@@ -175,15 +175,21 @@ export default function PricingPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {plans.map((plan, index) => (
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={staggerContainer}
+        >
+          {plans.map((plan) => (
             <motion.div
               key={plan.name}
-              variants={fadeIn}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              variants={useCaseCard}
+              className="gpu-accelerated"
             >
               <Card
-                className={`relative h-full bg-gray-900/50 border-gray-800 backdrop-blur-sm ${
+                className={`relative h-full bg-gray-900/50 border-gray-800 ${
                   plan.popular ? "border-green-500 border-2 shadow-lg shadow-green-500/20" : ""
                 }`}
               >
@@ -250,7 +256,7 @@ export default function PricingPage() {
             </Card>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Feature Comparison Table */}
         <div className="mt-16 max-w-5xl mx-auto">

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { UserNav } from "@/components/layout/UserNav";
 import { BarChart3, TrendingUp, Upload, Zap } from "lucide-react";
 import { motion } from "framer-motion";
-import { fadeIn, fadeInUp, staggerContainer, featureCard } from "@/lib/animations";
+import { fadeInUp, staggerContainer, featureCard, sectionContainer, useCaseCard } from "@/lib/animations";
 
 export default function Home() {
   return (
@@ -22,25 +22,23 @@ export default function Home() {
           animate="animate"
           variants={staggerContainer}
         >
+          {/* HERO SECTION - GPU accelerated, snappy animations */}
           <motion.h1 
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 gpu-accelerated"
             variants={fadeInUp}
-            transition={{ duration: 0.6 }}
           >
             Turn Your CSV & Excel Files Into
             <span className="text-green-500"> AI-Powered Insights</span>
           </motion.h1>
           <motion.p 
-            className="text-lg sm:text-xl text-gray-400 mb-12 max-w-2xl mx-auto px-4"
+            className="text-lg sm:text-xl text-gray-400 mb-12 max-w-2xl mx-auto px-4 gpu-accelerated"
             variants={fadeInUp}
-            transition={{ duration: 0.6, delay: 0.2 }}
           >
             Upload your spreadsheets (CSV or Excel) and instantly get AI-generated insights, interactive charts, and trend analysis. No setup, no learning curve.
           </motion.p>
           <motion.div 
-            className="flex flex-col sm:flex-row justify-center gap-4 mb-16 px-4"
+            className="flex flex-col sm:flex-row justify-center gap-4 mb-16 px-4 gpu-accelerated"
             variants={fadeInUp}
-            transition={{ duration: 0.6, delay: 0.4 }}
           >
             <Link href="/auth/signup" className="w-full sm:w-auto">
               <Button size="lg" className="w-full sm:w-auto px-8 py-6 text-lg">
@@ -54,6 +52,7 @@ export default function Home() {
             </Link>
           </motion.div>
 
+          {/* FEATURE CARDS - Scroll-triggered with stagger */}
           <motion.div 
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-16 px-4"
             initial="initial"
@@ -62,7 +61,7 @@ export default function Home() {
             variants={staggerContainer}
           >
             <motion.div 
-              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg"
+              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated"
               variants={featureCard}
               whileHover="whileHover"
             >
@@ -73,7 +72,7 @@ export default function Home() {
               </p>
             </motion.div>
             <motion.div 
-              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg"
+              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated"
               variants={featureCard}
               whileHover="whileHover"
             >
@@ -84,7 +83,7 @@ export default function Home() {
               </p>
             </motion.div>
             <motion.div 
-              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg"
+              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated"
               variants={featureCard}
               whileHover="whileHover"
             >
@@ -95,7 +94,7 @@ export default function Home() {
               </p>
             </motion.div>
             <motion.div 
-              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg"
+              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated"
               variants={featureCard}
               whileHover="whileHover"
             >
@@ -107,101 +106,115 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          {/* How It Works Section */}
+          {/* HOW IT WORKS - Scroll-triggered with stagger */}
           <motion.div 
-            className="mt-20 px-4"
-            variants={fadeInUp}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-20 px-4 gpu-accelerated"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={sectionContainer}
           >
             <h2 className="text-2xl sm:text-3xl font-bold mb-12 text-white text-center">How It Works</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              <div className="text-center">
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto"
+              variants={staggerContainer}
+            >
+              <motion.div className="text-center gpu-accelerated" variants={useCaseCard}>
                 <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-3xl font-bold text-green-500">1</span>
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">Upload Your Data</h3>
                 <p className="text-gray-400">Drop your CSV or Excel file. We support any tabular data format.</p>
-              </div>
-              <div className="text-center">
+              </motion.div>
+              <motion.div className="text-center gpu-accelerated" variants={useCaseCard}>
                 <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-3xl font-bold text-green-500">2</span>
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">AI Analyzes Everything</h3>
                 <p className="text-gray-400">Our AI automatically detects patterns, trends, and anomalies in seconds.</p>
-              </div>
-              <div className="text-center">
+              </motion.div>
+              <motion.div className="text-center gpu-accelerated" variants={useCaseCard}>
                 <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-3xl font-bold text-green-500">3</span>
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">Get Insights & Charts</h3>
                 <p className="text-gray-400">View interactive charts, statistics, and actionable recommendations.</p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </motion.div>
 
-          {/* Use Cases Section */}
+          {/* USE CASES - Scroll-triggered with stagger */}
           <motion.div 
-            className="mt-20 px-4"
-            variants={fadeInUp}
-            transition={{ duration: 0.6, delay: 0.7 }}
+            className="mt-20 px-4 gpu-accelerated"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={sectionContainer}
           >
             <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white text-center">Perfect For</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-              <div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center">
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
+              variants={staggerContainer}
+            >
+              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center gpu-accelerated" variants={useCaseCard}>
                 <div className="text-3xl mb-3">📊</div>
                 <h3 className="font-semibold text-white mb-2">Small Businesses</h3>
                 <p className="text-sm text-gray-400">Track sales, inventory, and customer data</p>
-              </div>
-              <div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center">
+              </motion.div>
+              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center gpu-accelerated" variants={useCaseCard}>
                 <div className="text-3xl mb-3">📈</div>
                 <h3 className="font-semibold text-white mb-2">Content Creators</h3>
                 <p className="text-sm text-gray-400">Analyze engagement and growth metrics</p>
-              </div>
-              <div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center">
+              </motion.div>
+              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center gpu-accelerated" variants={useCaseCard}>
                 <div className="text-3xl mb-3">🎓</div>
                 <h3 className="font-semibold text-white mb-2">Students & Researchers</h3>
                 <p className="text-sm text-gray-400">Visualize survey and experiment data</p>
-              </div>
-              <div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center">
+              </motion.div>
+              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center gpu-accelerated" variants={useCaseCard}>
                 <div className="text-3xl mb-3">💼</div>
                 <h3 className="font-semibold text-white mb-2">Freelancers</h3>
                 <p className="text-sm text-gray-400">Monitor projects and client metrics</p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </motion.div>
 
-          {/* FAQ Section */}
+          {/* FAQ - Scroll-triggered with stagger */}
           <motion.div 
-            className="mt-20 px-4 max-w-3xl mx-auto"
-            variants={fadeInUp}
-            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-20 px-4 max-w-3xl mx-auto gpu-accelerated"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={sectionContainer}
           >
             <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white text-center">Frequently Asked Questions</h2>
-            <div className="space-y-4">
-              <div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg">
+            <motion.div className="space-y-4" variants={staggerContainer}>
+              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated" variants={useCaseCard}>
                 <h3 className="font-semibold text-white mb-2">What file formats do you support?</h3>
                 <p className="text-gray-400">We support CSV and Excel files (.xlsx, .xls). Any tabular data works!</p>
-              </div>
-              <div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg">
+              </motion.div>
+              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated" variants={useCaseCard}>
                 <h3 className="font-semibold text-white mb-2">How does the AI analysis work?</h3>
                 <p className="text-gray-400">We use GPT-4 to analyze your data, detect patterns, identify trends, and provide actionable insights automatically.</p>
-              </div>
-              <div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg">
+              </motion.div>
+              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated" variants={useCaseCard}>
                 <h3 className="font-semibold text-white mb-2">Is my data secure?</h3>
                 <p className="text-gray-400">Yes! Your data is encrypted and stored securely. We never share your data with third parties.</p>
-              </div>
-              <div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg">
+              </motion.div>
+              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated" variants={useCaseCard}>
                 <h3 className="font-semibold text-white mb-2">Can I export my insights?</h3>
                 <p className="text-gray-400">Absolutely! Export your charts and insights as PDF or CSV files anytime.</p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </motion.div>
 
-          {/* Pricing CTA */}
+          {/* PRICING CTA - Scroll-triggered, NO backdrop-blur */}
           <motion.div 
-            className="mt-20 p-8 bg-gray-900/50 border border-gray-800 rounded-lg backdrop-blur-sm mx-4"
-            variants={fadeInUp}
-            transition={{ duration: 0.6, delay: 0.9 }}
+            className="mt-20 p-8 bg-gray-900/50 border border-gray-800 rounded-lg mx-4 gpu-accelerated"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={sectionContainer}
           >
             <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-white">Simple Pricing</h2>
             <p className="text-gray-400 mb-6">Start free, upgrade when you need more</p>
