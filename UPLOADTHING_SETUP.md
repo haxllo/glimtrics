@@ -1,6 +1,6 @@
-# UploadThing Setup Guide
+# UploadThing Setup Guide (v7+ SDK)
 
-This project uses UploadThing for file uploads with the free tier, which is sufficient for MVP.
+This project uses UploadThing v7+ SDK for file uploads with the free tier, which is sufficient for MVP.
 
 ## Setup Steps
 
@@ -16,35 +16,30 @@ This project uses UploadThing for file uploads with the free tier, which is suff
 2. Give your app a name (e.g., "AI Dashboards SaaS")
 3. Select the free tier
 
-### 3. Get Your API Keys
+### 3. Get Your API Token
 
 1. In your app dashboard, navigate to "API Keys"
-2. Copy your:
-   - **App ID** (UPLOADTHING_APP_ID)
-   - **Secret Key** (UPLOADTHING_SECRET)
+2. Copy your **UploadThing Token** (starts with `sk_live_` or `sk_test_`)
 
-### 4. Add Keys to Environment
+### 4. Add Token to Environment
 
-Add these to your `.env` file:
+Add this to your `.env` file:
 
 ```env
-UPLOADTHING_SECRET="your-secret-key-here"
-UPLOADTHING_APP_ID="your-app-id-here"
+UPLOADTHING_TOKEN="your-uploadthing-token-here"
 ```
 
 ## Usage in the App
 
 ### File Router Configuration
 
-The file router is configured in `app/api/uploadthing/core.ts` with three endpoints:
+The file router is configured in `app/api/uploadthing/core.ts` with one endpoint:
 
-1. **csvUploader** - CSV files only (max 4MB)
-2. **excelUploader** - Excel files only (max 8MB)
-3. **dataFileUploader** - CSV, Excel, and JSON (mixed upload)
+- **dataFileUploader** - CSV, Excel, and JSON files (CSV/JSON: max 4MB, Excel: max 8MB)
 
-### Upload Components
+### Upload Components (v7+ SDK)
 
-Use the `FileUploader` component in your pages:
+The project uses the v7+ SDK with generated components. Use the `FileUploader` wrapper component:
 
 ```tsx
 import { FileUploader } from "@/components/upload/FileUploader";
@@ -59,6 +54,27 @@ export default function MyPage() {
     />
   );
 }
+```
+
+Or use the generated components directly:
+
+```tsx
+import { UploadButton, UploadDropzone } from "@/lib/uploadthing";
+
+export default function MyPage() {
+  return (
+    <UploadDropzone
+      endpoint="dataFileUploader"
+      onClientUploadComplete={(res) => {
+        console.log("Files:", res);
+      }}
+      onUploadError={(error) => {
+        alert(`Error: ${error.message}`);
+      }}
+    />
+  );
+}
+
 ```
 
 ### Example Pages
@@ -86,15 +102,18 @@ const validation = validateDataStructure(data);
 const summary = getDataSummary(data);
 ```
 
-## Security
+## Security (v7+ SDK)
 
-- Middleware authentication is configured but currently uses a placeholder user ID
-- Update `app/api/uploadthing/core.ts` middleware to integrate with NextAuth:
+✅ **Authentication is already configured!** The middleware checks for valid NextAuth sessions:
 
 ```typescript
 .middleware(async ({ req }) => {
   const session = await getServerSession(authOptions);
-  if (!session?.user) throw new UploadThingError("Unauthorized");
+  
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized");
+  }
+
   return { userId: session.user.id };
 })
 ```
@@ -113,9 +132,9 @@ f({
 })
 ```
 
-### Styling
+### Styling (v7+ SDK)
 
-Customize upload components in `components/upload/FileUploader.tsx` using the `appearance` prop.
+For v7+, use the default styling or create a `uploadthing.css` file. The generated components use UploadThing's default styles which can be customized via CSS classes.
 
 ## Troubleshooting
 

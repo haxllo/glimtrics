@@ -1,7 +1,6 @@
 "use client";
 
-import { UploadButton, UploadDropzone } from "@uploadthing/react";
-import type { OurFileRouter } from "@/app/api/uploadthing/core";
+import { UploadButton, UploadDropzone } from "@/lib/uploadthing";
 import { useState } from "react";
 
 interface FileUploaderProps {
@@ -24,15 +23,11 @@ export function FileUploader({ onUploadComplete, variant = "dropzone" }: FileUpl
   if (variant === "button") {
     return (
       <div className="space-y-4">
-        <UploadButton<OurFileRouter, "dataFileUploader">
+        <UploadButton
           endpoint="dataFileUploader"
           onClientUploadComplete={handleUploadComplete}
           onUploadError={(error: Error) => {
             alert(`Upload error: ${error.message}`);
-          }}
-          appearance={{
-            button: "bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition",
-            container: "w-full",
           }}
         />
         {uploadedFile && (
@@ -56,17 +51,11 @@ export function FileUploader({ onUploadComplete, variant = "dropzone" }: FileUpl
 
   return (
     <div className="space-y-4">
-      <UploadDropzone<OurFileRouter, "dataFileUploader">
+      <UploadDropzone
         endpoint="dataFileUploader"
         onClientUploadComplete={handleUploadComplete}
         onUploadError={(error: Error) => {
           alert(`Upload error: ${error.message}`);
-        }}
-        appearance={{
-          container: "border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-indigo-500 transition",
-          uploadIcon: "text-indigo-600",
-          label: "text-gray-700",
-          allowedContent: "text-gray-500 text-sm",
         }}
       />
       {uploadedFile && (
