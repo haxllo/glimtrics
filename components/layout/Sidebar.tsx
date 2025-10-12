@@ -31,12 +31,6 @@ const routes = [
     color: "text-violet-500",
   },
   {
-    label: "Analytics",
-    icon: BarChart3,
-    href: "/dashboard/analytics",
-    color: "text-pink-700",
-  },
-  {
     label: "Settings",
     icon: Settings,
     href: "/dashboard/settings",
