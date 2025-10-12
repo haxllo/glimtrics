@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Calendar, FileText, Trash2 } from "lucide-react";
+import { Calendar, FileText, Trash2, BarChart3 } from "lucide-react";
 import { DashboardData } from "@/types/dashboard";
 
 export default async function DatasetsPage() {
@@ -84,18 +84,27 @@ export default async function DatasetsPage() {
                     {new Date(dashboard.createdAt).toLocaleDateString()}
                   </div>
 
-                  <div className="flex space-x-2">
-                    <Link href={`/dashboard/datasets/${dashboard.id}`} className="flex-1">
-                      <Button variant="outline" className="w-full">
-                        View Data
-                      </Button>
-                    </Link>
+                  <div className="space-y-2">
+                    <div className="flex space-x-2">
+                      <Link href={`/dashboard/datasets/${dashboard.id}`} className="flex-1">
+                        <Button variant="outline" className="w-full" size="sm">
+                          View Data
+                        </Button>
+                      </Link>
+                      <Link href={`/dashboard/analytics/${dashboard.id}`} className="flex-1">
+                        <Button variant="outline" className="w-full" size="sm">
+                          <BarChart3 className="h-4 w-4 mr-1" />
+                          Analytics
+                        </Button>
+                      </Link>
+                    </div>
                     <Button
                       variant="ghost"
-                      size="icon"
-                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                      size="sm"
+                      className="w-full text-red-600 hover:text-red-700 hover:bg-red-50"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className="h-4 w-4 mr-2" />
+                      Delete
                     </Button>
                   </div>
                 </CardContent>

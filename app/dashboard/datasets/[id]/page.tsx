@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Link from "next/link";
-import { ArrowLeft, Download, TrendingUp } from "lucide-react";
+import { ArrowLeft, Download, TrendingUp, BarChart3 } from "lucide-react";
 import { DashboardData } from "@/types/dashboard";
 
 export default async function DatasetDetailPage({ 
@@ -50,13 +50,15 @@ export default async function DatasetDetailPage({
           </div>
         </div>
         <div className="flex space-x-2">
+          <Link href={`/dashboard/analytics/${dashboard.id}`}>
+            <Button>
+              <BarChart3 className="h-4 w-4 mr-2" />
+              View Analytics
+            </Button>
+          </Link>
           <Button variant="outline">
             <Download className="h-4 w-4 mr-2" />
             Export CSV
-          </Button>
-          <Button>
-            <TrendingUp className="h-4 w-4 mr-2" />
-            Generate Insights
           </Button>
         </div>
       </div>
