@@ -14,6 +14,8 @@ import { StatsSummary } from "@/components/analytics/StatsSummary";
 import { DataFilters, type FilterState } from "@/components/analytics/DataFilters";
 import { InsightsSection } from "@/components/insights/InsightsSection";
 import { AIAssistant } from "@/components/insights/AIAssistant";
+import { FileDown } from "lucide-react";
+import { exportAnalyticsToPDF, exportInsightsToPDF } from "@/lib/pdf-export";
 
 interface Dashboard {
   id: string;
@@ -96,6 +98,44 @@ export default function AnalyticsPage({
     setFilteredData(filtered);
   };
 
+  const handleExportPDF = async () => {
+    if (!dashboard || !analytics) return;
+
+    try {
+      await exportAnalyticsToPDF('analytics-container', {
+        filename: `${dashboard.name}-analytics-${Date.now()}.pdf`,
+        datasetName: dashboard.name,
+        insights: insights.map(i => ({
+          type: i.type,
+          title: i.title,
+          description: i.description,
+        })),
+        statistics: analytics.statistics,
+      });
+    } catch (error) {
+      console.error('PDF export error:', error);
+      alert('Failed to export PDF. Please try again.');
+    }
+  };
+
+  const handleExportInsightsPDF = async () => {
+    if (!dashboard || insights.length === 0) return;
+
+    try {
+      await exportInsightsToPDF(
+        insights.map(i => ({
+          type: i.type,
+          title: i.title,
+          description: i.description,
+        })),
+        dashboard.name
+      );
+    } catch (error) {
+      console.error('PDF export error:', error);
+      alert('Failed to export PDF. Please try again.');
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-96">
@@ -134,13 +174,25 @@ export default function AnalyticsPage({
             </p>
           </div>
         </div>
+        <div className="flex space-x-2">
+          <Button onClick={handleExportPDF} variant="outline">
+            <FileDown className="h-4 w-4 mr-2" />
+            Export Full PDF
+          </Button>
+          {insights.length > 0 && (
+            <Button onClick={handleExportInsightsPDF} variant="outline">
+              <FileDown className="h-4 w-4 mr-2" />
+              Export Insights
+            </Button>
+          )}
+        </div>
       </div>
 
       <div className="mb-8">
         <InsightsSection dashboardId={resolvedParams.id} initialInsights={insights} />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div id="analytics-container" className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-1">
           <DataFilters
             columns={dashboardData.headers}
