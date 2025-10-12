@@ -12,7 +12,7 @@ interface FileUploaderProps {
 export function FileUploader({ onUploadComplete, variant = "dropzone" }: FileUploaderProps) {
   const [uploadedFile, setUploadedFile] = useState<string | null>(null);
 
-  const handleUploadComplete = (res: any) => {
+  const handleUploadComplete = (res: Array<{ url: string }>) => {
     if (res && res[0]) {
       const fileUrl = res[0].url;
       setUploadedFile(fileUrl);

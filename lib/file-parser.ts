@@ -2,7 +2,7 @@ import Papa from 'papaparse';
 
 export interface ParsedData {
   headers: string[];
-  rows: any[];
+  rows: Record<string, unknown>[];
   totalRows: number;
   totalColumns: number;
 }
@@ -16,7 +16,7 @@ export async function parseCSV(fileUrl: string): Promise<ParsedData> {
       skipEmptyLines: true,
       complete: (results) => {
         const headers = results.meta.fields || [];
-        const rows = results.data;
+        const rows = results.data as Record<string, unknown>[];
         
         resolve({
           headers,
@@ -50,10 +50,11 @@ export async function parseExcel(fileUrl: string): Promise<ParsedData> {
     }
     
     const headers = jsonData[0] as string[];
-    const rows = jsonData.slice(1).map((row: any) => {
-      const obj: any = {};
+    const rows = jsonData.slice(1).map((row) => {
+      const rowArray = row as unknown[];
+      const obj: Record<string, unknown> = {};
       headers.forEach((header, index) => {
-        obj[header] = row[index];
+        obj[header] = rowArray[index];
       });
       return obj;
     });
