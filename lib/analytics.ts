@@ -91,14 +91,18 @@ export function analyzeData(data: DashboardData): AnalyticsData {
       if (textColumns.includes(header)) {
         const distribution = new Map<string, number>();
         values.forEach((val) => {
-          const key = String(val);
+          let key = String(val);
+          // Truncate very long text for distribution (e.g., descriptions, URLs)
+          if (key.length > 100) {
+            key = key.substring(0, 100) + '...';
+          }
           distribution.set(key, (distribution.get(key) || 0) + 1);
         });
 
         const total = values.length;
         categoryDistribution[header] = Array.from(distribution.entries())
           .map(([name, count]) => ({
-            name,
+            name: name.length > 50 ? name.substring(0, 50) + '...' : name, // Further truncate for display
             value: count,
             percentage: (count / total) * 100,
           }))

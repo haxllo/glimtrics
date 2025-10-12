@@ -23,6 +23,21 @@ export interface AIInsight {
   data?: Record<string, unknown>;
 }
 
+// Helper to truncate long text values for AI processing
+function truncateRowValues(rows: Record<string, unknown>[]): Record<string, unknown>[] {
+  return rows.map(row => {
+    const truncatedRow: Record<string, unknown> = {};
+    Object.entries(row).forEach(([key, value]) => {
+      if (typeof value === 'string' && value.length > 200) {
+        truncatedRow[key] = value.substring(0, 200) + '... [truncated]';
+      } else {
+        truncatedRow[key] = value;
+      }
+    });
+    return truncatedRow;
+  });
+}
+
 export async function generateDatasetInsights(
   datasetName: string,
   summary: {
@@ -34,6 +49,9 @@ export async function generateDatasetInsights(
   statistics: Record<string, { min: number; max: number; avg: number; sum: number }>,
   sampleRows: Record<string, unknown>[]
 ): Promise<AIInsight[]> {
+  // Truncate long text values to prevent token overflow
+  const truncatedSamples = truncateRowValues(sampleRows.slice(0, 3));
+  
   const prompt = `You are a data analyst AI. Analyze this dataset and provide actionable insights.
 
 Dataset: ${datasetName}
@@ -48,8 +66,8 @@ ${Object.entries(statistics)
 Text/Category Columns:
 ${summary.textColumns.join(', ') || 'None'}
 
-Sample Data (first 3 rows):
-${JSON.stringify(sampleRows.slice(0, 3), null, 2)}
+Sample Data (first 3 rows, long text truncated):
+${JSON.stringify(truncatedSamples, null, 2)}
 
 Please provide 4-6 insights in the following JSON format:
 [
