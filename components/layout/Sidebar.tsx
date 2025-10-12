@@ -40,6 +40,15 @@ const routes = [
 export function Sidebar() {
   const pathname = usePathname();
 
+  const isActive = (href: string) => {
+    // Exact match for dashboard home
+    if (href === "/dashboard") {
+      return pathname === "/dashboard";
+    }
+    // For other routes, check if pathname starts with the route
+    return pathname === href || pathname.startsWith(href + "/");
+  };
+
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-gray-900 text-white">
       <div className="px-3 py-2 flex-1">
@@ -55,7 +64,7 @@ export function Sidebar() {
               href={route.href}
               className={cn(
                 "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition",
-                pathname === route.href || pathname.startsWith(route.href + "/")
+                isActive(route.href)
                   ? "text-white bg-white/10"
                   : "text-gray-400"
               )}
