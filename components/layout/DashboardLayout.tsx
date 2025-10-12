@@ -22,7 +22,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         <Sidebar />
       </div>
 
-      <main className="md:pl-64 min-h-screen bg-gray-50">
+      <main className="md:pl-64 min-h-screen bg-gray-950">
         <Header onMenuClick={() => setIsOpen(true)} />
         <div className="p-4 sm:p-6 lg:p-8">{children}</div>
       </main>

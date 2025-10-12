@@ -152,13 +152,13 @@ export default function PricingPage() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card
-                className={`relative h-full ${
-                  plan.popular ? "border-indigo-500 border-2 shadow-lg" : ""
+                className={`relative h-full bg-gray-900/50 border-gray-800 backdrop-blur-sm ${
+                  plan.popular ? "border-green-500 border-2 shadow-lg shadow-green-500/20" : ""
                 }`}
               >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-indigo-500 text-white px-4 py-1 rounded-full text-sm font-medium flex items-center">
+                  <span className="bg-green-500 text-white px-4 py-1 rounded-full text-sm font-medium flex items-center shadow-lg">
                     <Sparkles className="h-4 w-4 mr-1" />
                     Most Popular
                   </span>
@@ -190,8 +190,8 @@ export default function PricingPage() {
                   disabled={loadingPriceId !== null}
                   className={`w-full text-sm sm:text-base ${
                     plan.popular
-                      ? "bg-indigo-600 hover:bg-indigo-700"
-                      : ""
+                      ? "bg-green-500 hover:bg-green-600 text-white"
+                      : "border-gray-700 hover:border-green-500 hover:bg-green-500/10"
                   }`}
                   variant={plan.popular ? "default" : "outline"}
                 >
