@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, Loader2, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { initializePaddle, Paddle } from '@paddle/paddle-js';
 
 const plans = [
   {
@@ -58,6 +59,25 @@ export default function PricingPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [loadingPriceId, setLoadingPriceId] = useState<string | null>(null);
+  const [paddle, setPaddle] = useState<Paddle | null>(null);
+
+  useEffect(() => {
+    const clientSideToken = process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN;
+    
+    if (clientSideToken) {
+      const environment = process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT === 'production' ? 'production' : 'sandbox';
+      initializePaddle({ 
+        environment,
+        token: clientSideToken,
+      }).then(
+        (paddleInstance: Paddle | undefined) => {
+          if (paddleInstance) {
+            setPaddle(paddleInstance);
+          }
+        },
+      );
+    }
+  }, []);
 
   const handleSubscribe = async (priceId: string | null | undefined) => {
     if (status === "unauthenticated") {
@@ -70,26 +90,34 @@ export default function PricingPage() {
       return;
     }
 
+    if (!paddle) {
+      alert("Payment system is loading. Please try again in a moment.");
+      return;
+    }
+
     setLoadingPriceId(priceId);
 
     try {
-      const response = await fetch("/api/stripe/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const checkoutConfig: any = {
+        items: [{ priceId, quantity: 1 }],
+        customData: {
+          userId: session?.user?.id,
         },
-        body: JSON.stringify({ priceId }),
-      });
+        successCallback: () => {
+          router.push('/dashboard?success=true');
+        },
+      };
 
-      if (!response.ok) {
-        throw new Error("Failed to create checkout session");
+      if (session?.user?.email) {
+        checkoutConfig.customer = { email: session.user.email };
       }
 
-      const { url } = await response.json();
-      window.location.href = url;
+      paddle.Checkout.open(checkoutConfig);
     } catch (error) {
       console.error("Subscription error:", error);
       alert("Failed to start checkout. Please try again.");
+    } finally {
       setLoadingPriceId(null);
     }
   };

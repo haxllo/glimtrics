@@ -7,7 +7,8 @@ import {
   LayoutDashboard, 
   Upload, 
   Settings,
-  Database 
+  Database,
+  CreditCard
 } from "lucide-react";
 
 const routes = [
@@ -28,6 +29,12 @@ const routes = [
     icon: Upload,
     href: "/dashboard/upload",
     color: "text-violet-500",
+  },
+  {
+    label: "Upgrade",
+    icon: CreditCard,
+    href: "/pricing",
+    color: "text-yellow-500",
   },
   {
     label: "Settings",

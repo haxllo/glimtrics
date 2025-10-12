@@ -1,27 +1,16 @@
-import Stripe from 'stripe';
+import { Paddle } from '@paddle/paddle-node-sdk';
 
-let stripeInstance: Stripe | null = null;
+let paddleInstance: Paddle | null = null;
 
-export function getStripe(): Stripe {
-  if (!stripeInstance) {
-    if (!process.env.STRIPE_SECRET_KEY) {
-      throw new Error('STRIPE_SECRET_KEY is not defined in environment variables. Add it to your .env file.');
+export function getPaddle(): Paddle {
+  if (!paddleInstance) {
+    if (!process.env.PADDLE_API_KEY) {
+      throw new Error('PADDLE_API_KEY is not defined in environment variables. Add it to your .env file.');
     }
-    stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: '2025-09-30.clover',
-      typescript: true,
-    });
+    paddleInstance = new Paddle(process.env.PADDLE_API_KEY);
   }
-  return stripeInstance;
+  return paddleInstance;
 }
-
-// Export a lazy-initialized instance
-export const stripe = {
-  get subscriptions() { return getStripe().subscriptions; },
-  get customers() { return getStripe().customers; },
-  get checkout() { return getStripe().checkout; },
-  get webhooks() { return getStripe().webhooks; },
-};
 
 export const PLANS = {
   FREE: {
@@ -43,7 +32,7 @@ export const PLANS = {
   PRO: {
     name: 'Pro',
     price: 1499, // $14.99 in cents
-    priceId: process.env.STRIPE_PRO_PRICE_ID,
+    priceId: process.env.NEXT_PUBLIC_PADDLE_PRO_PRICE_ID,
     features: [
       'Unlimited datasets',
       'Unlimited AI insights',
@@ -61,7 +50,7 @@ export const PLANS = {
   BUSINESS: {
     name: 'Business',
     price: 4999, // $49.99 in cents
-    priceId: process.env.STRIPE_BUSINESS_PRICE_ID,
+    priceId: process.env.NEXT_PUBLIC_PADDLE_BUSINESS_PRICE_ID,
     features: [
       'Everything in Pro',
       'Multi-user dashboards',

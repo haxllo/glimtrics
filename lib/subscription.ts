@@ -1,5 +1,5 @@
 import { prisma } from './prisma';
-import { getPlanLimits } from './stripe';
+import { getPlanLimits } from './paddle';
 
 export async function getUserSubscription(userId: string) {
   const subscription = await prisma.subscription.findUnique({

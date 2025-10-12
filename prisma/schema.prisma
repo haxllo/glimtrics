@@ -59,16 +59,16 @@ model VerificationToken {
 }
 
 model Subscription {
-  id                 String    @id @default(cuid())
-  userId             String    @unique
-  stripeCustomerId   String?   @unique
-  stripeSubscriptionId String? @unique
-  stripePriceId      String?
-  stripeCurrentPeriodEnd DateTime?
-  plan               String    @default("free") // free, basic, premium
-  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
+  id                     String    @id @default(cuid())
+  userId                 String    @unique
+  stripeCustomerId       String?   @unique // Reusing for Paddle customer ID
+  stripeSubscriptionId   String?   @unique // Reusing for Paddle subscription ID
+  stripePriceId          String?   // Reusing for Paddle price ID
+  stripeCurrentPeriodEnd DateTime? // Reusing for Paddle period end
+  plan                   String    @default("free") // free, pro, business
+  user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
 }
 
 model Dashboard {
