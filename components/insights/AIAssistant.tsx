@@ -111,17 +111,17 @@ export function AIAssistant({ dashboardId, datasetName }: AIAssistantProps) {
                   >
                     <div
                       className={`p-2 rounded-full ${
-                        message.role === "user" ? "bg-indigo-100" : "bg-gray-100"
+                        message.role === "user" ? "bg-green-500/20" : "bg-gray-800/50"
                       }`}
                     >
                       {message.role === "user" ? (
-                        <User className="h-4 w-4 text-indigo-600" />
+                        <User className="h-4 w-4 text-green-500" />
                       ) : (
                         <Bot className="h-4 w-4 text-gray-600" />
                       )}
                     </div>
                     <div>
-                      <Card className={message.role === "user" ? "bg-indigo-50" : ""}>
+                      <Card className={message.role === "user" ? "bg-green-500/10" : "bg-gray-900/50"}>
                         <CardContent className="p-3">
                           <p className="text-sm">{message.content}</p>
                         </CardContent>

@@ -142,8 +142,8 @@ export default async function DatasetDetailPage({
           </div>
 
           {displayRows.length < rows.length && (
-            <div className="mt-4 p-4 bg-gray-50 border border-gray-200 rounded-lg text-center">
-              <p className="text-sm text-gray-600">
+            <div className="mt-4 p-4 bg-gray-800/50 border border-gray-700 rounded-lg text-center">
+              <p className="text-sm text-gray-400">
                 Showing first 50 rows. Export full dataset to view all data.
               </p>
             </div>

@@ -26,7 +26,7 @@ function ErrorContent() {
         <CardDescription>Something went wrong during sign in</CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-gray-700">{errorMessage}</p>
+        <p className="text-gray-400">{errorMessage}</p>
       </CardContent>
       <CardFooter>
         <Link href="/auth/login" className="w-full">
@@ -39,7 +39,7 @@ function ErrorContent() {
 
 export default function AuthErrorPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 px-4">
       <Suspense fallback={
         <Card className="w-full max-w-md">
           <CardContent className="p-6">

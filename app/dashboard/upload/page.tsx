@@ -146,8 +146,8 @@ export default function UploadPage() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center justify-center space-x-2 py-8">
-              <Loader2 className="h-6 w-6 animate-spin text-indigo-600" />
-              <p className="text-gray-700">Processing your file...</p>
+              <Loader2 className="h-6 w-6 animate-spin text-green-500" />
+              <p className="text-gray-300">Processing your file...</p>
             </div>
           </CardContent>
         </Card>
@@ -164,35 +164,35 @@ export default function UploadPage() {
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-sm text-gray-600">Total Rows</p>
-                <p className="text-2xl font-bold text-gray-900">{parsedData.totalRows}</p>
+              <div className="p-4 bg-gray-800/50 rounded-lg">
+                <p className="text-sm text-gray-400">Total Rows</p>
+                <p className="text-2xl font-bold text-white">{parsedData.totalRows}</p>
               </div>
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-sm text-gray-600">Total Columns</p>
-                <p className="text-2xl font-bold text-gray-900">{parsedData.totalColumns}</p>
+              <div className="p-4 bg-gray-800/50 rounded-lg">
+                <p className="text-sm text-gray-400">Total Columns</p>
+                <p className="text-2xl font-bold text-white">{parsedData.totalColumns}</p>
               </div>
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-sm text-gray-600">Numeric Columns</p>
-                <p className="text-2xl font-bold text-gray-900">
+              <div className="p-4 bg-gray-800/50 rounded-lg">
+                <p className="text-sm text-gray-400">Numeric Columns</p>
+                <p className="text-2xl font-bold text-white">
                   {parsedData.summary.numericColumns.length}
                 </p>
               </div>
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-sm text-gray-600">Text Columns</p>
-                <p className="text-2xl font-bold text-gray-900">
+              <div className="p-4 bg-gray-800/50 rounded-lg">
+                <p className="text-sm text-gray-400">Text Columns</p>
+                <p className="text-2xl font-bold text-white">
                   {parsedData.summary.textColumns.length}
                 </p>
               </div>
             </div>
 
             <div>
-              <h3 className="font-semibold text-gray-900 mb-2">Columns Detected:</h3>
+              <h3 className="font-semibold text-white mb-2">Columns Detected:</h3>
               <div className="flex flex-wrap gap-2">
                 {parsedData.headers.map((header: string, index: number) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm"
+                    className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm"
                   >
                     {header}
                   </span>

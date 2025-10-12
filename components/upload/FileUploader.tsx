@@ -39,7 +39,7 @@ export function FileUploader({ onUploadComplete, variant = "dropzone" }: FileUpl
               href={uploadedFile} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-sm text-indigo-600 hover:underline"
+              className="text-sm text-green-500 hover:underline"
             >
               View file
             </a>
@@ -67,7 +67,7 @@ export function FileUploader({ onUploadComplete, variant = "dropzone" }: FileUpl
             href={uploadedFile} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-sm text-indigo-600 hover:underline"
+            className="text-sm text-green-500 hover:underline"
           >
             View file
           </a>

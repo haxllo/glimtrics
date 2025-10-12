@@ -52,7 +52,7 @@ export function InsightsSection({ dashboardId, initialInsights = [] }: InsightsS
     return (
       <Card>
         <CardContent className="flex flex-col items-center justify-center py-12">
-          <Sparkles className="h-16 w-16 text-indigo-400 mb-4" />
+          <Sparkles className="h-16 w-16 text-green-500 mb-4" />
           <h3 className="text-xl font-semibold text-gray-900 mb-2">
             AI Insights Available
           </h3>
