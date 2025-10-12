@@ -133,13 +133,13 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-white mb-4">
             Simple, Transparent Pricing
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-400">
             Choose the plan that&apos;s right for you
           </p>
         </div>
@@ -165,12 +165,12 @@ export default function PricingPage() {
                 </div>
               )}
               <CardHeader>
-                <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                <CardDescription>{plan.description}</CardDescription>
+                <CardTitle className="text-2xl text-white">{plan.name}</CardTitle>
+                <CardDescription className="text-gray-400">{plan.description}</CardDescription>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
+                  <span className="text-4xl font-bold text-white">{plan.price}</span>
                   {plan.price !== "$0" && (
-                    <span className="text-gray-600">/month</span>
+                    <span className="text-gray-400">/month</span>
                   )}
                 </div>
               </CardHeader>
@@ -179,7 +179,7 @@ export default function PricingPage() {
                   {plan.features.map((feature, index) => (
                     <li key={index} className="flex items-start">
                       <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{feature}</span>
+                      <span className="text-gray-300">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -212,15 +212,39 @@ export default function PricingPage() {
           ))}
         </div>
 
-        <div className="mt-12 text-center">
-          <p className="text-gray-600 mb-4">
-            Have questions? <Link href="/contact" className="text-indigo-600 hover:text-indigo-700">Contact us</Link>
-          </p>
-          {session && (
-            <Link href="/dashboard">
-              <Button variant="outline">Back to Dashboard</Button>
-            </Link>
-          )}
+        <div className="mt-16 text-center space-y-8">
+          <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-8 max-w-2xl mx-auto">
+            <h3 className="text-xl font-semibold text-white mb-4">All Plans Include</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+              <div className="flex items-start">
+                <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-gray-300">CSV & Excel support</span>
+              </div>
+              <div className="flex items-start">
+                <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-gray-300">Secure data storage</span>
+              </div>
+              <div className="flex items-start">
+                <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-gray-300">Interactive charts</span>
+              </div>
+              <div className="flex items-start">
+                <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-gray-300">Real-time analytics</span>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <p className="text-gray-400 mb-4">
+              Need a custom plan? <Link href="/dashboard/settings" className="text-green-500 hover:text-green-400 underline">Contact our team</Link>
+            </p>
+            {session && (
+              <Link href="/dashboard">
+                <Button variant="outline" className="border-gray-700 hover:border-green-500 text-gray-300">Back to Dashboard</Button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>
