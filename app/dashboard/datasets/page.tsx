@@ -1,10 +1,8 @@
 import { getCurrentUser } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/prisma";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Calendar, FileText, Trash2, BarChart3 } from "lucide-react";
-import { DashboardData } from "@/types/dashboard";
+import { DatasetsClient } from "./DatasetsClient";
 
 export default async function DatasetsPage() {
   const user = await getCurrentUser();
@@ -37,82 +35,7 @@ export default async function DatasetsPage() {
         </Link>
       </div>
 
-      {dashboards.length === 0 ? (
-        <Card>
-          <CardContent className="flex flex-col items-center justify-center py-16">
-            <FileText className="h-16 w-16 text-gray-400 mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-2">
-              No datasets yet
-            </h3>
-            <p className="text-gray-400 text-center mb-6">
-              Upload your first CSV or Excel file to get started
-            </p>
-            <Link href="/dashboard/upload">
-              <Button>Upload Dataset</Button>
-            </Link>
-          </CardContent>
-        </Card>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {dashboards.map((dashboard) => {
-            const data = dashboard.data as unknown as DashboardData;
-            const totalRows = data?.totalRows || 0;
-            const totalColumns = data?.totalColumns || 0;
-
-            return (
-              <Card key={dashboard.id} className="bg-gray-900/50 border-gray-800 hover:border-green-500/50 transition">
-                <CardHeader>
-                  <CardTitle className="line-clamp-1">{dashboard.name}</CardTitle>
-                  <CardDescription className="line-clamp-2">
-                    {dashboard.description || "No description"}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-3 bg-gray-800/50 rounded">
-                      <p className="text-xs text-gray-400">Rows</p>
-                      <p className="text-lg font-bold text-white">{totalRows}</p>
-                    </div>
-                    <div className="p-3 bg-gray-800/50 rounded">
-                      <p className="text-xs text-gray-400">Columns</p>
-                      <p className="text-lg font-bold text-white">{totalColumns}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center text-sm text-gray-400">
-                    <Calendar className="h-4 w-4 mr-2" />
-                    {new Date(dashboard.createdAt).toLocaleDateString()}
-                  </div>
-
-                  <div className="space-y-2">
-                    <div className="flex space-x-2">
-                      <Link href={`/dashboard/datasets/${dashboard.id}`} className="flex-1">
-                        <Button variant="outline" className="w-full" size="sm">
-                          View Data
-                        </Button>
-                      </Link>
-                      <Link href={`/dashboard/analytics/${dashboard.id}`} className="flex-1">
-                        <Button variant="outline" className="w-full" size="sm">
-                          <BarChart3 className="h-4 w-4 mr-1" />
-                          Analytics
-                        </Button>
-                      </Link>
-                    </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="w-full text-red-500 hover:text-red-400 hover:bg-red-500/10"
-                    >
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      Delete
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-      )}
+      <DatasetsClient dashboards={dashboards} />
     </div>
   );
 }
