@@ -15,6 +15,7 @@ export interface AnalyticsData {
       avg: number;
       sum: number;
       count: number;
+      isDate?: boolean; // Flag to indicate date column
     };
   };
   chartData: {
@@ -41,6 +42,34 @@ export function analyzeData(data: DashboardData): AnalyticsData {
     
     if (values.length === 0) return;
 
+    // Check if date first (before numeric check)
+    const dateValues = values.filter((val) => {
+      if (typeof val === 'string') {
+        const date = new Date(val);
+        return !isNaN(date.getTime()) && val.includes('-'); // Simple date check
+      }
+      return false;
+    });
+
+    if (dateValues.length > values.length * 0.7) {
+      // Mostly dates - only calculate min/max
+      dateColumns.push(header);
+      
+      const dates = dateValues.map(val => new Date(String(val)).getTime());
+      const min = Math.min(...dates);
+      const max = Math.max(...dates);
+
+      statistics[header] = {
+        min: min,
+        max: max,
+        avg: 0, // Not applicable for dates
+        sum: 0, // Not applicable for dates
+        count: dateValues.length,
+        isDate: true,
+      };
+      return; // Skip numeric check
+    }
+
     // Check if numeric
     const numericValues = values
       .map((val) => {
@@ -64,6 +93,7 @@ export function analyzeData(data: DashboardData): AnalyticsData {
         avg,
         sum,
         count: numericValues.length,
+        isDate: false,
       };
 
       // Create chart data for numeric columns
@@ -72,20 +102,8 @@ export function analyzeData(data: DashboardData): AnalyticsData {
         value: val,
       }));
     } else {
-      // Check if date
-      const dateValues = values.filter((val) => {
-        if (typeof val === 'string') {
-          const date = new Date(val);
-          return !isNaN(date.getTime());
-        }
-        return false;
-      });
-
-      if (dateValues.length > values.length * 0.7) {
-        dateColumns.push(header);
-      } else {
-        textColumns.push(header);
-      }
+      // Text columns
+      textColumns.push(header);
 
       // Create category distribution for text columns
       if (textColumns.includes(header)) {

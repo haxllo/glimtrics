@@ -15,6 +15,7 @@ export interface PDFExportOptions {
     max: number;
     avg: number;
     sum: number;
+    isDate?: boolean;
   }>;
 }
 
@@ -131,14 +132,27 @@ export async function exportAnalyticsToPDF(
         yPos += 6;
 
         pdf.setFont('helvetica', 'normal');
-        pdf.text(`Min: ${stats.min.toFixed(2)}`, 20, yPos);
-        yPos += 5;
-        pdf.text(`Max: ${stats.max.toFixed(2)}`, 20, yPos);
-        yPos += 5;
-        pdf.text(`Avg: ${stats.avg.toFixed(2)}`, 20, yPos);
-        yPos += 5;
-        pdf.text(`Sum: ${stats.sum.toFixed(2)}`, 20, yPos);
-        yPos += 8;
+        
+        if (stats.isDate) {
+          // Date columns - show earliest and latest
+          pdf.text(`Earliest: ${new Date(stats.min).toLocaleDateString()}`, 20, yPos);
+          yPos += 5;
+          pdf.text(`Latest: ${new Date(stats.max).toLocaleDateString()}`, 20, yPos);
+          yPos += 5;
+          const days = Math.ceil((stats.max - stats.min) / (1000 * 60 * 60 * 24));
+          pdf.text(`Date Range: ${days} days`, 20, yPos);
+          yPos += 8;
+        } else {
+          // Numeric columns - show all stats
+          pdf.text(`Min: ${stats.min.toFixed(2)}`, 20, yPos);
+          yPos += 5;
+          pdf.text(`Max: ${stats.max.toFixed(2)}`, 20, yPos);
+          yPos += 5;
+          pdf.text(`Avg: ${stats.avg.toFixed(2)}`, 20, yPos);
+          yPos += 5;
+          pdf.text(`Sum: ${stats.sum.toFixed(2)}`, 20, yPos);
+          yPos += 8;
+        }
       });
     }
 

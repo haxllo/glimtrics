@@ -10,6 +10,7 @@ interface StatsSummaryProps {
       avg: number;
       sum: number;
       count: number;
+      isDate?: boolean;
     };
   };
   trends?: {
@@ -52,24 +53,45 @@ export function StatsSummary({ statistics, trends }: StatsSummaryProps) {
               <CardDescription>{stats.count} values</CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                <div>
-                  <p className="text-gray-500">Average</p>
-                  <p className="font-semibold">{stats.avg.toFixed(2)}</p>
+              {stats.isDate ? (
+                // Date columns - only show earliest and latest
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div>
+                    <p className="text-gray-500">Earliest</p>
+                    <p className="font-semibold text-xs">{new Date(stats.min).toLocaleDateString()}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-500">Latest</p>
+                    <p className="font-semibold text-xs">{new Date(stats.max).toLocaleDateString()}</p>
+                  </div>
+                  <div className="col-span-2">
+                    <p className="text-gray-500">Date Range</p>
+                    <p className="font-semibold text-xs">
+                      {Math.ceil((stats.max - stats.min) / (1000 * 60 * 60 * 24))} days
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-gray-500">Sum</p>
-                  <p className="font-semibold">{stats.sum.toFixed(2)}</p>
+              ) : (
+                // Numeric columns - show all stats
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div>
+                    <p className="text-gray-500">Average</p>
+                    <p className="font-semibold">{stats.avg.toFixed(2)}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-500">Sum</p>
+                    <p className="font-semibold">{stats.sum.toFixed(2)}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-500">Min</p>
+                    <p className="font-semibold">{stats.min.toFixed(2)}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-500">Max</p>
+                    <p className="font-semibold">{stats.max.toFixed(2)}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-gray-500">Min</p>
-                  <p className="font-semibold">{stats.min.toFixed(2)}</p>
-                </div>
-                <div>
-                  <p className="text-gray-500">Max</p>
-                  <p className="font-semibold">{stats.max.toFixed(2)}</p>
-                </div>
-              </div>
+              )}
             </CardContent>
           </Card>
         );
