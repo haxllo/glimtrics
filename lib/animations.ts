@@ -29,9 +29,11 @@ export const fadeInUp: Variants = {
 };
 
 export const staggerContainer: Variants = {
+  initial: {},
   animate: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
     },
   },
 };

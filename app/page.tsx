@@ -56,15 +56,15 @@ export default function Home() {
 
           <motion.div 
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-16 px-4"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
           >
             <motion.div 
               className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg"
-              initial="initial"
-              whileInView="animate"
-              whileHover="whileHover"
-              viewport={{ once: true, margin: "-100px" }}
               variants={featureCard}
+              whileHover="whileHover"
             >
               <Upload className="h-10 w-10 text-green-500 mb-4 mx-auto" />
               <h3 className="font-semibold text-lg mb-2 text-white">Easy Upload</h3>
@@ -74,11 +74,8 @@ export default function Home() {
             </motion.div>
             <motion.div 
               className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg"
-              initial="initial"
-              whileInView="animate"
-              whileHover="whileHover"
-              viewport={{ once: true, margin: "-100px" }}
               variants={featureCard}
+              whileHover="whileHover"
             >
               <Zap className="h-10 w-10 text-yellow-500 mb-4 mx-auto" />
               <h3 className="font-semibold text-lg mb-2 text-white">AI Analysis</h3>
@@ -88,11 +85,8 @@ export default function Home() {
             </motion.div>
             <motion.div 
               className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg"
-              initial="initial"
-              whileInView="animate"
-              whileHover="whileHover"
-              viewport={{ once: true, margin: "-100px" }}
               variants={featureCard}
+              whileHover="whileHover"
             >
               <BarChart3 className="h-10 w-10 text-blue-500 mb-4 mx-auto" />
               <h3 className="font-semibold text-lg mb-2 text-white">Beautiful Charts</h3>
@@ -102,11 +96,8 @@ export default function Home() {
             </motion.div>
             <motion.div 
               className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg"
-              initial="initial"
-              whileInView="animate"
-              whileHover="whileHover"
-              viewport={{ once: true, margin: "-100px" }}
               variants={featureCard}
+              whileHover="whileHover"
             >
               <TrendingUp className="h-10 w-10 text-green-500 mb-4 mx-auto" />
               <h3 className="font-semibold text-lg mb-2 text-white">Actionable Insights</h3>
