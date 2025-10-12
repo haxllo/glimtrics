@@ -49,10 +49,10 @@ export function DataChart({
           <ResponsiveContainer width="100%" height={height}>
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey={xAxisKey} />
-              <YAxis />
+              <XAxis dataKey={xAxisKey} style={{ fontSize: '12px' }} />
+              <YAxis style={{ fontSize: '12px' }} />
               <Tooltip />
-              <Legend />
+              <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} iconSize={10} />
               <Line type="monotone" dataKey={dataKey} stroke="#3b82f6" strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
@@ -62,10 +62,10 @@ export function DataChart({
           <ResponsiveContainer width="100%" height={height}>
             <BarChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey={xAxisKey} />
-              <YAxis />
+              <XAxis dataKey={xAxisKey} style={{ fontSize: '12px' }} />
+              <YAxis style={{ fontSize: '12px' }} />
               <Tooltip />
-              <Legend />
+              <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} iconSize={10} />
               <Bar dataKey={dataKey} fill="#3b82f6" />
             </BarChart>
           </ResponsiveContainer>
@@ -75,10 +75,10 @@ export function DataChart({
           <ResponsiveContainer width="100%" height={height}>
             <AreaChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey={xAxisKey} />
-              <YAxis />
+              <XAxis dataKey={xAxisKey} style={{ fontSize: '12px' }} />
+              <YAxis style={{ fontSize: '12px' }} />
               <Tooltip />
-              <Legend />
+              <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} iconSize={10} />
               <Area type="monotone" dataKey={dataKey} stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.6} />
             </AreaChart>
           </ResponsiveContainer>
@@ -102,7 +102,7 @@ export function DataChart({
                 ))}
               </Pie>
               <Tooltip />
-              <Legend />
+              <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} iconSize={8} />
             </PieChart>
           </ResponsiveContainer>
         )}

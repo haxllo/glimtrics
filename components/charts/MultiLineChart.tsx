@@ -46,10 +46,10 @@ export function MultiLineChart({
         <ResponsiveContainer width="100%" height={height}>
           <LineChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey={xAxisKey} />
-            <YAxis />
+            <XAxis dataKey={xAxisKey} style={{ fontSize: '12px' }} />
+            <YAxis style={{ fontSize: '12px' }} />
             <Tooltip />
-            <Legend />
+            <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} iconSize={10} />
             {lines.map((line, index) => (
               <Line
                 key={line.dataKey}

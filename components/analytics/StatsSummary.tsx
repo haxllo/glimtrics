@@ -42,11 +42,10 @@ export function StatsSummary({ statistics, trends }: StatsSummaryProps) {
               <div className="flex items-center justify-between">
                 <CardTitle className="text-lg">{column}</CardTitle>
                 {trend && (
-                  <Badge variant={trend === 'increasing' ? 'default' : trend === 'decreasing' ? 'destructive' : 'secondary'}>
-                    {trend === 'increasing' && <TrendingUp className="h-3 w-3 mr-1" />}
-                    {trend === 'decreasing' && <TrendingDown className="h-3 w-3 mr-1" />}
-                    {trend === 'stable' && <Minus className="h-3 w-3 mr-1" />}
-                    {trend}
+                  <Badge variant={trend === 'increasing' ? 'default' : trend === 'decreasing' ? 'destructive' : 'secondary'} className="px-2">
+                    {trend === 'increasing' && <TrendingUp className="h-4 w-4" />}
+                    {trend === 'decreasing' && <TrendingDown className="h-4 w-4" />}
+                    {trend === 'stable' && <Minus className="h-4 w-4" />}
                   </Badge>
                 )}
               </div>
