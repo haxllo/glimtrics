@@ -39,7 +39,7 @@ function ErrorContent() {
 
 export default function AuthErrorPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 via-gray-950 to-black gradient-noise px-4">
       <Suspense fallback={
         <Card className="w-full max-w-md">
           <CardContent className="p-6">
