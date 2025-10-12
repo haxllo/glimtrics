@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { 
   LayoutDashboard, 
   Upload, 
-  BarChart3, 
   Settings,
   Database 
 } from "lucide-react";
