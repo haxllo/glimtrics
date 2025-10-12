@@ -54,14 +54,47 @@ export const slideInLeft: Variants = {
   exit: { opacity: 0, x: 100 },
 };
 
-export const cardHover = {
-  rest: { scale: 1, y: 0 },
-  hover: { 
+// Optimized card hover with hardware acceleration
+export const cardHover: Variants = {
+  initial: { 
+    scale: 1, 
+    y: 0,
+    borderColor: "rgba(31, 41, 55, 1)", // gray-800
+  },
+  whileHover: { 
     scale: 1.03,
     y: -4,
+    borderColor: "rgba(16, 185, 129, 0.5)", // green-500/50
     transition: {
       duration: 0.3,
       ease: smoothEase,
+    },
+  },
+};
+
+// Feature card animation (combines fade in + hover) - GPU optimized
+export const featureCard: Variants = {
+  initial: { 
+    opacity: 0, 
+    y: 20,
+    scale: 1,
+  },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: smoothEase,
+    }
+  },
+  whileHover: { 
+    scale: 1.03,
+    y: -6,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 17,
     },
   },
 };

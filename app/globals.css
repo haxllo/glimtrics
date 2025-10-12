@@ -66,17 +66,26 @@ body {
 
 /* Smooth animations - Hardware accelerated (like Insightify) */
 @layer utilities {
+  /* Force GPU acceleration for smooth 60fps */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
   .smooth-transition {
     transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
     will-change: transform;
+    transform: translateZ(0); /* GPU acceleration */
   }
   
   .hover-lift {
     transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transform: translateZ(0); /* GPU acceleration */
   }
   
   .hover-lift:hover {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-4px) scale(1.02) translateZ(0);
   }
   
   /* Smooth gradient animation */
@@ -88,5 +97,13 @@ body {
   @keyframes gradient-shift {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
+  }
+  
+  /* Optimize expensive effects */
+  .optimized-blur {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    /* Limit blur area to improve performance */
+    contain: paint;
   }
 }

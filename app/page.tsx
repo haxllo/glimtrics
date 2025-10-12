@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { UserNav } from "@/components/layout/UserNav";
 import { BarChart3, TrendingUp, Upload, Zap } from "lucide-react";
 import { motion } from "framer-motion";
-import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
+import { fadeIn, fadeInUp, staggerContainer, featureCard } from "@/lib/animations";
 
 export default function Home() {
   return (
@@ -59,10 +59,12 @@ export default function Home() {
             variants={staggerContainer}
           >
             <motion.div 
-              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg backdrop-blur-sm hover:border-green-500/50 transition-colors"
-              variants={fadeIn}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
+              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg"
+              initial="initial"
+              whileInView="animate"
+              whileHover="whileHover"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={featureCard}
             >
               <Upload className="h-10 w-10 text-green-500 mb-4 mx-auto" />
               <h3 className="font-semibold text-lg mb-2 text-white">Easy Upload</h3>
@@ -71,10 +73,12 @@ export default function Home() {
               </p>
             </motion.div>
             <motion.div 
-              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg backdrop-blur-sm hover:border-green-500/50 transition-colors"
-              variants={fadeIn}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
+              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg"
+              initial="initial"
+              whileInView="animate"
+              whileHover="whileHover"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={featureCard}
             >
               <Zap className="h-10 w-10 text-yellow-500 mb-4 mx-auto" />
               <h3 className="font-semibold text-lg mb-2 text-white">AI Analysis</h3>
@@ -83,10 +87,12 @@ export default function Home() {
               </p>
             </motion.div>
             <motion.div 
-              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg backdrop-blur-sm hover:border-green-500/50 transition-colors"
-              variants={fadeIn}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
+              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg"
+              initial="initial"
+              whileInView="animate"
+              whileHover="whileHover"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={featureCard}
             >
               <BarChart3 className="h-10 w-10 text-blue-500 mb-4 mx-auto" />
               <h3 className="font-semibold text-lg mb-2 text-white">Beautiful Charts</h3>
@@ -95,10 +101,12 @@ export default function Home() {
               </p>
             </motion.div>
             <motion.div 
-              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg backdrop-blur-sm hover:border-green-500/50 transition-colors"
-              variants={fadeIn}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
+              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg"
+              initial="initial"
+              whileInView="animate"
+              whileHover="whileHover"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={featureCard}
             >
               <TrendingUp className="h-10 w-10 text-green-500 mb-4 mx-auto" />
               <h3 className="font-semibold text-lg mb-2 text-white">Actionable Insights</h3>
