@@ -22,7 +22,7 @@ export function Header({ onMenuClick }: HeaderProps) {
           <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
         </Button>
         <Link href="/dashboard" className="md:hidden">
-          <h1 className="text-lg font-bold text-white">AI Dashboards</h1>
+          <h1 className="text-lg font-bold text-white">NexSight</h1>
         </Link>
       </div>
       <UserNav />

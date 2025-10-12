@@ -101,7 +101,7 @@ export default async function DashboardPage() {
         <Card>
           <CardHeader>
             <CardTitle>Getting Started</CardTitle>
-            <CardDescription>Learn how to use AI Dashboards</CardDescription>
+            <CardDescription>Learn how to use NexSight</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex items-start space-x-3">
