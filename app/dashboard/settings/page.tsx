@@ -149,6 +149,8 @@ export default function SettingsPage() {
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 disabled={isLoading}
                 placeholder="Enter current password"
+                autoComplete="current-password"
+                required
               />
             </div>
             <Separator />
@@ -162,6 +164,8 @@ export default function SettingsPage() {
                 disabled={isLoading}
                 placeholder="Enter new password"
                 minLength={6}
+                autoComplete="new-password"
+                required
               />
             </div>
             <div className="space-y-2">
@@ -173,6 +177,8 @@ export default function SettingsPage() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 disabled={isLoading}
                 placeholder="Confirm new password"
+                autoComplete="new-password"
+                required
               />
             </div>
             <Button type="submit" disabled={isLoading}>
