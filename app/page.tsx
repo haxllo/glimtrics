@@ -9,9 +9,9 @@ import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <nav className="container mx-auto px-4 py-6 flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900">AI Dashboards</h2>
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
+      <nav className="container mx-auto px-4 py-6 flex justify-between items-center border-b border-gray-800">
+        <h2 className="text-2xl font-bold text-white">AI Dashboards</h2>
         <UserNav />
       </nav>
 
@@ -23,14 +23,14 @@ export default function Home() {
           variants={staggerContainer}
         >
           <motion.h1 
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
             variants={fadeInUp}
             transition={{ duration: 0.6 }}
           >
             AI-Powered Analytics for Everyone
           </motion.h1>
           <motion.p 
-            className="text-lg sm:text-xl text-gray-600 mb-12 max-w-2xl mx-auto px-4"
+            className="text-lg sm:text-xl text-gray-400 mb-12 max-w-2xl mx-auto px-4"
             variants={fadeInUp}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
@@ -59,69 +59,69 @@ export default function Home() {
             variants={staggerContainer}
           >
             <motion.div 
-              className="bg-white p-6 rounded-lg shadow-md"
+              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg backdrop-blur-sm hover:border-green-500/50 transition-colors"
               variants={fadeIn}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
-              <Upload className="h-10 w-10 text-blue-600 mb-4 mx-auto" />
-              <h3 className="font-semibold text-lg mb-2">Easy Upload</h3>
-              <p className="text-gray-600 text-sm">
+              <Upload className="h-10 w-10 text-green-500 mb-4 mx-auto" />
+              <h3 className="font-semibold text-lg mb-2 text-white">Easy Upload</h3>
+              <p className="text-gray-400 text-sm">
                 Upload CSV or Excel files in seconds
               </p>
             </motion.div>
             <motion.div 
-              className="bg-white p-6 rounded-lg shadow-md"
+              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg backdrop-blur-sm hover:border-green-500/50 transition-colors"
               variants={fadeIn}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
-              <Zap className="h-10 w-10 text-yellow-600 mb-4 mx-auto" />
-              <h3 className="font-semibold text-lg mb-2">AI Analysis</h3>
-              <p className="text-gray-600 text-sm">
+              <Zap className="h-10 w-10 text-yellow-500 mb-4 mx-auto" />
+              <h3 className="font-semibold text-lg mb-2 text-white">AI Analysis</h3>
+              <p className="text-gray-400 text-sm">
                 Automatic trend detection and insights
               </p>
             </motion.div>
             <motion.div 
-              className="bg-white p-6 rounded-lg shadow-md"
+              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg backdrop-blur-sm hover:border-green-500/50 transition-colors"
               variants={fadeIn}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
-              <BarChart3 className="h-10 w-10 text-purple-600 mb-4 mx-auto" />
-              <h3 className="font-semibold text-lg mb-2">Beautiful Charts</h3>
-              <p className="text-gray-600 text-sm">
+              <BarChart3 className="h-10 w-10 text-blue-500 mb-4 mx-auto" />
+              <h3 className="font-semibold text-lg mb-2 text-white">Beautiful Charts</h3>
+              <p className="text-gray-400 text-sm">
                 Interactive visualizations for your data
               </p>
             </motion.div>
             <motion.div 
-              className="bg-white p-6 rounded-lg shadow-md"
+              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg backdrop-blur-sm hover:border-green-500/50 transition-colors"
               variants={fadeIn}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
-              <TrendingUp className="h-10 w-10 text-green-600 mb-4 mx-auto" />
-              <h3 className="font-semibold text-lg mb-2">Actionable Insights</h3>
-              <p className="text-gray-600 text-sm">
+              <TrendingUp className="h-10 w-10 text-green-500 mb-4 mx-auto" />
+              <h3 className="font-semibold text-lg mb-2 text-white">Actionable Insights</h3>
+              <p className="text-gray-400 text-sm">
                 Get suggestions to improve your business
               </p>
             </motion.div>
           </motion.div>
 
           <motion.div 
-            className="mt-16 p-8 bg-white rounded-lg shadow-lg mx-4"
+            className="mt-16 p-8 bg-gray-900/50 border border-gray-800 rounded-lg backdrop-blur-sm mx-4"
             variants={fadeInUp}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4">Simple Pricing</h2>
-            <p className="text-gray-600 mb-6">Start free, upgrade when you need more</p>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-white">Simple Pricing</h2>
+            <p className="text-gray-400 mb-6">Start free, upgrade when you need more</p>
             <div className="inline-block">
-              <div className="text-3xl sm:text-4xl font-bold text-indigo-600">$12-34/month</div>
+              <div className="text-3xl sm:text-4xl font-bold text-green-500">$12-34/month</div>
               <p className="text-gray-500 mt-2">Free tier available</p>
             </div>
             <div className="mt-6">
               <Link href="/pricing">
-                <Button variant="outline">View All Plans</Button>
+                <Button variant="outline" className="border-green-500 text-green-500 hover:bg-green-500/10">View All Plans</Button>
               </Link>
             </div>
           </motion.div>
