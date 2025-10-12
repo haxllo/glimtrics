@@ -120,13 +120,21 @@ export default async function DatasetDetailPage({
                     <TableCell className="font-medium text-gray-500">
                       {rowIndex + 1}
                     </TableCell>
-                    {headers.map((header: string, colIndex: number) => (
-                      <TableCell key={colIndex}>
-                        {row[header] !== null && row[header] !== undefined
-                          ? String(row[header])
-                          : "-"}
-                      </TableCell>
-                    ))}
+                    {headers.map((header: string, colIndex: number) => {
+                      const value = row[header];
+                      const stringValue = value !== null && value !== undefined ? String(value) : "-";
+                      const truncated = stringValue.length > 100 
+                        ? stringValue.substring(0, 100) + "..." 
+                        : stringValue;
+                      
+                      return (
+                        <TableCell key={colIndex} className="max-w-xs">
+                          <div className="truncate" title={stringValue}>
+                            {truncated}
+                          </div>
+                        </TableCell>
+                      );
+                    })}
                   </TableRow>
                 ))}
               </TableBody>
