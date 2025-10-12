@@ -1,0 +1,199 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { use } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { DashboardData } from "@/types/dashboard";
+import { analyzeData, filterData, calculateTrend, type AnalyticsData } from "@/lib/analytics";
+import { DataChart } from "@/components/charts/DataChart";
+import { MultiLineChart } from "@/components/charts/MultiLineChart";
+import { StatsSummary } from "@/components/analytics/StatsSummary";
+import { DataFilters, type FilterState } from "@/components/analytics/DataFilters";
+
+interface Dashboard {
+  id: string;
+  name: string;
+  data: unknown;
+}
+
+export default function AnalyticsPage({ 
+  params 
+}: { 
+  params: Promise<{ id: string }> 
+}) {
+  const resolvedParams = use(params);
+  const router = useRouter();
+  const [dashboard, setDashboard] = useState<Dashboard | null>(null);
+  const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
+  const [filteredData, setFilteredData] = useState<Record<string, unknown>[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [trends, setTrends] = useState<{ [key: string]: 'increasing' | 'decreasing' | 'stable' }>({});
+
+  useEffect(() => {
+    async function fetchDashboard() {
+      try {
+        const response = await fetch(`/api/dashboard/${resolvedParams.id}`);
+        if (!response.ok) {
+          router.push("/dashboard/datasets");
+          return;
+        }
+        const data = await response.json();
+        setDashboard(data);
+
+        const dashboardData = data.data as unknown as DashboardData;
+        const analyticsData = analyzeData(dashboardData);
+        setAnalytics(analyticsData);
+        setFilteredData(dashboardData.rows);
+
+        const trendsData: { [key: string]: 'increasing' | 'decreasing' | 'stable' } = {};
+        analyticsData.summary.numericColumns.forEach((col) => {
+          const values = dashboardData.rows
+            .map((row) => {
+              const val = row[col];
+              return typeof val === 'number' ? val : parseFloat(String(val));
+            })
+            .filter((val) => !isNaN(val));
+          trendsData[col] = calculateTrend(values);
+        });
+        setTrends(trendsData);
+      } catch (error) {
+        console.error("Failed to fetch dashboard:", error);
+        router.push("/dashboard/datasets");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchDashboard();
+  }, [resolvedParams.id, router]);
+
+  const handleFilterChange = (filters: FilterState) => {
+    if (!dashboard) return;
+
+    const dashboardData = dashboard.data as unknown as DashboardData;
+    const filtered = filterData(dashboardData.rows, filters);
+    setFilteredData(filtered);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <div className="text-center">
+          <p className="text-gray-600">Loading analytics...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!dashboard || !analytics) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <div className="text-center">
+          <p className="text-gray-600">Dashboard not found</p>
+        </div>
+      </div>
+    );
+  }
+
+  const dashboardData = dashboard.data as unknown as DashboardData;
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-4">
+          <Link href={`/dashboard/datasets/${resolvedParams.id}`}>
+            <Button variant="ghost" size="icon">
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+          </Link>
+          <div>
+            <h1 className="text-3xl font-bold">Analytics: {dashboard.name}</h1>
+            <p className="text-gray-500 mt-1">
+              {filteredData.length} rows • {dashboardData.headers.length} columns
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="lg:col-span-1">
+          <DataFilters
+            columns={dashboardData.headers}
+            numericColumns={analytics.summary.numericColumns}
+            textColumns={analytics.summary.textColumns}
+            statistics={analytics.statistics}
+            onFilterChange={handleFilterChange}
+          />
+        </div>
+
+        <div className="lg:col-span-3 space-y-6">
+          <div>
+            <h2 className="text-xl font-semibold mb-4">Summary Statistics</h2>
+            <StatsSummary statistics={analytics.statistics} trends={trends} />
+          </div>
+
+          {analytics.summary.numericColumns.length > 0 && (
+            <div>
+              <h2 className="text-xl font-semibold mb-4">Numeric Data Visualizations</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {analytics.summary.numericColumns.slice(0, 4).map((column) => (
+                  <DataChart
+                    key={column}
+                    data={analytics.chartData[column] || []}
+                    title={column}
+                    description={`Distribution of ${column} values`}
+                    type="line"
+                    height={250}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {analytics.summary.numericColumns.length > 1 && (
+            <div>
+              <h2 className="text-xl font-semibold mb-4">Comparison Chart</h2>
+              <MultiLineChart
+                data={filteredData.slice(0, 50).map((row, idx) => {
+                  const dataPoint: Record<string, string | number> = { name: `Row ${idx + 1}` };
+                  analytics.summary.numericColumns.slice(0, 3).forEach((col) => {
+                    const val = row[col];
+                    dataPoint[col] = typeof val === 'number' ? val : parseFloat(String(val)) || 0;
+                  });
+                  return dataPoint;
+                })}
+                title="Multi-Column Comparison"
+                description="Compare trends across different columns"
+                lines={analytics.summary.numericColumns.slice(0, 3).map((col) => ({
+                  dataKey: col,
+                  name: col,
+                }))}
+              />
+            </div>
+          )}
+
+          {Object.keys(analytics.categoryDistribution).length > 0 && (
+            <div>
+              <h2 className="text-xl font-semibold mb-4">Category Distribution</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {Object.entries(analytics.categoryDistribution).slice(0, 4).map(([column, distribution]) => (
+                  <DataChart
+                    key={column}
+                    data={distribution}
+                    title={column}
+                    description={`Top ${distribution.length} categories`}
+                    type="pie"
+                    height={300}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
