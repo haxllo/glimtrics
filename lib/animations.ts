@@ -1,14 +1,31 @@
 import { Variants } from 'framer-motion';
 
+// Smooth easing curves (like Insightify)
+const smoothEase = [0.25, 0.1, 0.25, 1] as const;
+
 export const fadeIn: Variants = {
   initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: smoothEase,
+    }
+  },
   exit: { opacity: 0, y: -20 },
 };
 
 export const fadeInUp: Variants = {
   initial: { opacity: 0, y: 60 },
-  animate: { opacity: 1, y: 0 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: smoothEase,
+    }
+  },
 };
 
 export const staggerContainer: Variants = {
@@ -38,12 +55,13 @@ export const slideInLeft: Variants = {
 };
 
 export const cardHover = {
-  rest: { scale: 1 },
+  rest: { scale: 1, y: 0 },
   hover: { 
-    scale: 1.02,
+    scale: 1.03,
+    y: -4,
     transition: {
-      duration: 0.2,
-      ease: 'easeInOut',
+      duration: 0.3,
+      ease: smoothEase,
     },
   },
 };
