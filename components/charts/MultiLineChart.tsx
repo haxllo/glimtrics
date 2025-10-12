@@ -1,5 +1,6 @@
 "use client";
 
+import { memo, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -14,7 +15,7 @@ interface MultiLineChartProps {
   height?: number;
 }
 
-export function MultiLineChart({ 
+function MultiLineChartComponent({ 
   data, 
   title, 
   description, 
@@ -22,6 +23,21 @@ export function MultiLineChart({
   xAxisKey = 'name',
   height = 350 
 }: MultiLineChartProps) {
+  // Memoize lines rendering
+  const renderedLines = useMemo(() => 
+    lines.map((line, index) => (
+      <Line
+        key={line.dataKey}
+        type="monotone"
+        dataKey={line.dataKey}
+        name={line.name}
+        stroke={line.color || COLORS[index % COLORS.length]}
+        strokeWidth={2}
+      />
+    )),
+    [lines]
+  );
+
   if (!data || data.length === 0) {
     return (
       <Card>
@@ -50,19 +66,13 @@ export function MultiLineChart({
             <YAxis style={{ fontSize: '12px' }} />
             <Tooltip />
             <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} iconSize={10} />
-            {lines.map((line, index) => (
-              <Line
-                key={line.dataKey}
-                type="monotone"
-                dataKey={line.dataKey}
-                name={line.name}
-                stroke={line.color || COLORS[index % COLORS.length]}
-                strokeWidth={2}
-              />
-            ))}
+            {renderedLines}
           </LineChart>
         </ResponsiveContainer>
       </CardContent>
     </Card>
   );
 }
+
+// Memoize to prevent unnecessary re-renders
+export const MultiLineChart = memo(MultiLineChartComponent);

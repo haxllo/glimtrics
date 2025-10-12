@@ -15,3 +15,15 @@ export interface DatasetSummary {
   textColumns: string[];
   dateColumns: string[];
 }
+
+// Type guard for DashboardData
+export function isDashboardData(data: unknown): data is DashboardData {
+  if (!data || typeof data !== 'object') return false;
+  const d = data as Partial<DashboardData>;
+  return (
+    Array.isArray(d.headers) &&
+    Array.isArray(d.rows) &&
+    typeof d.totalRows === 'number' &&
+    typeof d.totalColumns === 'number'
+  );
+}

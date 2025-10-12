@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, memo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,7 +19,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
-import { DashboardData } from "@/types/dashboard";
+import { getDashboardStats } from "@/lib/prisma-helpers";
 
 interface DatasetCardProps {
   dashboard: {
@@ -31,14 +31,12 @@ interface DatasetCardProps {
   };
 }
 
-export function DatasetCard({ dashboard }: DatasetCardProps) {
+function DatasetCardComponent({ dashboard }: DatasetCardProps) {
   const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const data = dashboard.data as unknown as DashboardData;
-  const totalRows = data?.totalRows || 0;
-  const totalColumns = data?.totalColumns || 0;
+  const { totalRows, totalColumns } = getDashboardStats(dashboard.data);
 
   const handleDelete = async () => {
     setIsDeleting(true);
@@ -146,3 +144,6 @@ export function DatasetCard({ dashboard }: DatasetCardProps) {
     </Card>
   );
 }
+
+// Memoize to prevent unnecessary re-renders
+export const DatasetCard = memo(DatasetCardComponent);

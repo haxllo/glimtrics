@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, memo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
@@ -29,7 +29,7 @@ export interface FilterState {
   categories?: string[];
 }
 
-export function DataFilters({ 
+function DataFiltersComponent({ 
   columns, 
   numericColumns, 
   onFilterChange, 
@@ -148,3 +148,6 @@ export function DataFilters({
     </Card>
   );
 }
+
+// Memoize to prevent unnecessary re-renders
+export const DataFilters = memo(DataFiltersComponent);

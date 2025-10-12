@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from 'react';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -15,7 +16,7 @@ interface DataChartProps {
   height?: number;
 }
 
-export function DataChart({ 
+function DataChartComponent({ 
   data, 
   title, 
   description, 
@@ -110,3 +111,6 @@ export function DataChart({
     </Card>
   );
 }
+
+// Memoize the entire component to prevent re-renders when props haven't changed
+export const DataChart = memo(DataChartComponent);
