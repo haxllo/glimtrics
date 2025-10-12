@@ -89,6 +89,8 @@ Return ONLY the JSON array, no additional text.`;
 
   try {
     const openai = getOpenAI();
+    console.log('[OpenAI] Sending request to GPT-4o-mini...');
+    
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
@@ -105,16 +107,39 @@ Return ONLY the JSON array, no additional text.`;
       max_tokens: 1500,
     });
 
+    console.log('[OpenAI] Received response from API');
     const content = completion.choices[0].message.content;
+    
     if (!content) {
+      console.error('[OpenAI] Empty response content');
       throw new Error('No response from OpenAI');
     }
 
+    console.log('[OpenAI] Response length:', content.length);
+    console.log('[OpenAI] Response preview:', content.substring(0, 200));
+
     // Parse the JSON response
-    const insights = JSON.parse(content) as AIInsight[];
+    let insights: AIInsight[];
+    try {
+      insights = JSON.parse(content) as AIInsight[];
+    } catch (parseError) {
+      console.error('[OpenAI] JSON parse error:', parseError);
+      console.error('[OpenAI] Raw content:', content);
+      throw new Error('Failed to parse AI response as JSON');
+    }
+
+    if (!Array.isArray(insights)) {
+      console.error('[OpenAI] Response is not an array:', typeof insights);
+      throw new Error('AI response is not in the expected format');
+    }
+
+    console.log('[OpenAI] Successfully parsed', insights.length, 'insights');
     return insights;
   } catch (error) {
-    console.error('OpenAI API error:', error);
+    console.error('[OpenAI] Full error:', error);
+    if (error instanceof Error) {
+      throw error;
+    }
     throw new Error('Failed to generate insights');
   }
 }
