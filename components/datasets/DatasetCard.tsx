@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, BarChart3, Trash2 } from "lucide-react";
+import { EditDatasetDialog } from "./EditDatasetDialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -100,6 +101,14 @@ export function DatasetCard({ dashboard }: DatasetCardProps) {
               </Button>
             </Link>
           </div>
+          
+          <EditDatasetDialog
+            dataset={{
+              id: dashboard.id,
+              name: dashboard.name,
+              description: dashboard.description,
+            }}
+          />
           
           <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
             <AlertDialogTrigger asChild>
