@@ -21,6 +21,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="preload"
+          href="/gradient-deep-navy-&-purple-2560x1440.svg"
+          as="image"
+          type="image/svg+xml"
+        />
+      </head>
       <body className={inter.className}>
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <SessionProvider>
