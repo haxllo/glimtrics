@@ -27,7 +27,7 @@ export default function Home() {
             variants={fadeInUp}
             transition={{ duration: 0.6 }}
           >
-            Turn Your CSV Files Into
+            Turn Your CSV & Excel Files Into
             <span className="text-green-500"> AI-Powered Insights</span>
           </motion.h1>
           <motion.p 
@@ -35,7 +35,7 @@ export default function Home() {
             variants={fadeInUp}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Upload your spreadsheets and instantly get AI-generated insights, interactive charts, and trend analysis. No setup, no learning curve.
+            Upload your spreadsheets (CSV or Excel) and instantly get AI-generated insights, interactive charts, and trend analysis. No setup, no learning curve.
           </motion.p>
           <motion.div 
             className="flex flex-col sm:flex-row justify-center gap-4 mb-16 px-4"
@@ -67,7 +67,7 @@ export default function Home() {
               <Upload className="h-10 w-10 text-green-500 mb-4 mx-auto" />
               <h3 className="font-semibold text-lg mb-2 text-white">Easy Upload</h3>
               <p className="text-gray-400 text-sm">
-                Upload CSV or Excel files in seconds
+                CSV, Excel (.xlsx, .xls) - Upload in seconds
               </p>
             </motion.div>
             <motion.div 

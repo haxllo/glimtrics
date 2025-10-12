@@ -95,8 +95,13 @@ export default function UploadPage() {
           <CardHeader>
             <CardTitle>Upload Your File</CardTitle>
             <CardDescription>
-              Drag and drop or click to upload CSV, Excel, or JSON files
+              Drag and drop or click to upload your data file
             </CardDescription>
+            <div className="pt-2">
+              <p className="text-sm text-green-500 font-medium">
+                📊 Supported: CSV (.csv), Excel (.xlsx, .xls), JSON (.json)
+              </p>
+            </div>
           </CardHeader>
           <CardContent>
             <UploadDropzone
@@ -114,13 +119,13 @@ export default function UploadPage() {
                 console.log("Upload begin:", name);
               }}
             />
-            <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-900 font-medium mb-1">
-                Supported File Types:
+            <div className="mt-4 p-3 bg-gray-800/50 border border-gray-700 rounded-lg">
+              <p className="text-sm text-gray-200 font-medium mb-1">
+                📄 File Limits:
               </p>
-              <ul className="text-sm text-blue-800 list-disc list-inside">
+              <ul className="text-sm text-gray-300 list-disc list-inside">
                 <li>CSV files (.csv) - up to 4MB</li>
-                <li>Excel files (.xls, .xlsx) - up to 8MB</li>
+                <li>Excel files (.xlsx, .xls) - up to 8MB</li>
                 <li>JSON files (.json) - up to 4MB</li>
               </ul>
             </div>

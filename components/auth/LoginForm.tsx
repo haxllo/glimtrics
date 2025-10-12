@@ -112,31 +112,7 @@ export function LoginForm() {
           </Button>
         </form>
 
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-gray-900 px-2 text-gray-400">Or continue with</span>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <Button
-            variant="outline"
-            onClick={() => handleOAuthSignIn("google")}
-            disabled={isLoading}
-          >
-            Google
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => handleOAuthSignIn("github")}
-            disabled={isLoading}
-          >
-            GitHub
-          </Button>
-        </div>
+        {/* OAuth temporarily disabled - will add Google & Microsoft after launch */}
       </CardContent>
       <CardFooter className="flex flex-col space-y-2">
         <Link href="/auth/forgot-password" className="text-sm text-center text-green-500 hover:underline">
