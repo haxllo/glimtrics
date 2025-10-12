@@ -10,24 +10,28 @@ import { DashboardData } from "@/types/dashboard";
 export default async function DashboardPage() {
   const user = await getCurrentUser();
 
+  if (!user || !user.id) {
+    return <div>Please log in to access the dashboard.</div>;
+  }
+
   const dashboardCount = await prisma.dashboard.count({
-    where: { userId: user?.id },
+    where: { userId: user.id },
   });
 
   const insightCount = await prisma.insight.count({
     where: {
       dashboard: {
-        userId: user?.id,
+        userId: user.id,
       },
     },
   });
 
   const subscription = await prisma.subscription.findUnique({
-    where: { userId: user?.id },
+    where: { userId: user.id },
   });
 
   const recentDashboards = await prisma.dashboard.findMany({
-    where: { userId: user?.id },
+    where: { userId: user.id },
     orderBy: { createdAt: "desc" },
     take: 3,
   });

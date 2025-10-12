@@ -8,6 +8,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Check, Loader2, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { initializePaddle, Paddle } from '@paddle/paddle-js';
+import { motion } from "framer-motion";
+import { fadeIn } from "@/lib/animations";
 
 const plans = [
   {
@@ -35,7 +37,7 @@ const plans = [
       "Priority support",
       "Advanced analytics",
     ],
-    priceId: process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID,
+    priceId: process.env.NEXT_PUBLIC_PADDLE_PRO_PRICE_ID,
     popular: true,
   },
   {
@@ -50,7 +52,7 @@ const plans = [
       "White-label reports",
       "Dedicated support",
     ],
-    priceId: process.env.NEXT_PUBLIC_STRIPE_BUSINESS_PRICE_ID,
+    priceId: process.env.NEXT_PUBLIC_PADDLE_BUSINESS_PRICE_ID,
     popular: false,
   },
 ];
@@ -86,12 +88,19 @@ export default function PricingPage() {
     }
 
     if (!priceId) {
+      // Free plan - go to dashboard
       router.push("/dashboard");
       return;
     }
 
+    // Debug logging
+    console.log('Paddle instance:', paddle);
+    console.log('Price ID:', priceId);
+    console.log('Client Token:', process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN);
+
     if (!paddle) {
-      alert("Payment system is loading. Please try again in a moment.");
+      alert("Payment system is not initialized. Please make sure Paddle environment variables are set in .env file.");
+      console.error('Paddle not initialized. Check NEXT_PUBLIC_PADDLE_CLIENT_TOKEN in .env');
       return;
     }
 
@@ -113,6 +122,7 @@ export default function PricingPage() {
         checkoutConfig.customer = { email: session.user.email };
       }
 
+      console.log('Opening Paddle checkout with config:', checkoutConfig);
       paddle.Checkout.open(checkoutConfig);
     } catch (error) {
       console.error("Subscription error:", error);
@@ -135,13 +145,17 @@ export default function PricingPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {plans.map((plan) => (
-            <Card
+          {plans.map((plan, index) => (
+            <motion.div
               key={plan.name}
-              className={`relative ${
-                plan.popular ? "border-indigo-500 border-2 shadow-lg" : ""
-              }`}
+              variants={fadeIn}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
+              <Card
+                className={`relative h-full ${
+                  plan.popular ? "border-indigo-500 border-2 shadow-lg" : ""
+                }`}
+              >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                   <span className="bg-indigo-500 text-white px-4 py-1 rounded-full text-sm font-medium flex items-center">
@@ -174,7 +188,7 @@ export default function PricingPage() {
                 <Button
                   onClick={() => handleSubscribe(plan.priceId)}
                   disabled={loadingPriceId !== null}
-                  className={`w-full ${
+                  className={`w-full text-sm sm:text-base ${
                     plan.popular
                       ? "bg-indigo-600 hover:bg-indigo-700"
                       : ""
@@ -194,6 +208,7 @@ export default function PricingPage() {
                 </Button>
               </CardFooter>
             </Card>
+            </motion.div>
           ))}
         </div>
 

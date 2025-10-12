@@ -2,26 +2,30 @@
 
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Sidebar } from "./Sidebar";
 import { UserNav } from "./UserNav";
+import Link from "next/link";
 
-export function Header() {
+interface HeaderProps {
+  onMenuClick: () => void;
+}
+
+export function Header({ onMenuClick }: HeaderProps) {
   return (
-    <div className="flex items-center p-4 border-b">
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="md:hidden">
-            <Menu className="h-6 w-6" />
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left" className="p-0 w-64">
-          <Sidebar />
-        </SheetContent>
-      </Sheet>
-      <div className="flex w-full justify-end">
-        <UserNav />
+    <div className="flex items-center justify-between p-3 sm:p-4 border-b bg-white sticky top-0 z-10 shadow-sm">
+      <div className="flex items-center gap-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden"
+          onClick={onMenuClick}
+        >
+          <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
+        </Button>
+        <Link href="/dashboard" className="md:hidden">
+          <h1 className="text-lg font-bold text-gray-900">AI Dashboards</h1>
+        </Link>
       </div>
+      <UserNav />
     </div>
   );
 }
