@@ -5,6 +5,7 @@ import { BarChart3, FileText, TrendingUp, Upload } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { DashboardData } from "@/types/dashboard";
 
 export default async function DashboardPage() {
   const user = await getCurrentUser();
@@ -23,6 +24,12 @@ export default async function DashboardPage() {
 
   const subscription = await prisma.subscription.findUnique({
     where: { userId: user?.id },
+  });
+
+  const recentDashboards = await prisma.dashboard.findMany({
+    where: { userId: user?.id },
+    orderBy: { createdAt: "desc" },
+    take: 3,
   });
 
   return (
@@ -115,7 +122,7 @@ export default async function DashboardPage() {
         </Card>
       </div>
 
-      {dashboardCount === 0 && (
+      {dashboardCount === 0 ? (
         <Card className="border-dashed border-2">
           <CardContent className="flex flex-col items-center justify-center py-12">
             <Upload className="h-12 w-12 text-gray-400 mb-4" />
@@ -126,6 +133,44 @@ export default async function DashboardPage() {
             <Link href="/dashboard/upload">
               <Button>Upload Your First File</Button>
             </Link>
+          </CardContent>
+        </Card>
+      ) : (
+        <Card>
+          <CardHeader>
+            <div className="flex justify-between items-center">
+              <div>
+                <CardTitle>Recent Datasets</CardTitle>
+                <CardDescription>Your recently uploaded files</CardDescription>
+              </div>
+              <Link href="/dashboard/datasets">
+                <Button variant="outline" size="sm">View All</Button>
+              </Link>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {recentDashboards.map((dashboard) => {
+              const data = dashboard.data as unknown as DashboardData;
+              return (
+                <Link
+                  key={dashboard.id}
+                  href={`/dashboard/datasets/${dashboard.id}`}
+                  className="block"
+                >
+                  <div className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900">{dashboard.name}</h3>
+                      <p className="text-sm text-gray-500">
+                        {data?.totalRows || 0} rows • {data?.totalColumns || 0} columns
+                      </p>
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      {new Date(dashboard.createdAt).toLocaleDateString()}
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </CardContent>
         </Card>
       )}
