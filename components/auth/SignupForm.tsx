@@ -82,7 +82,7 @@ export function SignupForm() {
   };
 
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full max-w-md bg-gray-900/50 border-gray-800">
       <CardHeader>
         <CardTitle>Create an account</CardTitle>
         <CardDescription>Get started with your free account</CardDescription>
@@ -152,7 +152,7 @@ export function SignupForm() {
             <span className="w-full border-t" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white px-2 text-gray-500">Or continue with</span>
+            <span className="bg-gray-900 px-2 text-gray-400">Or continue with</span>
           </div>
         </div>
 
@@ -174,9 +174,9 @@ export function SignupForm() {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col space-y-2">
-        <p className="text-sm text-center text-gray-600">
+        <p className="text-sm text-center text-gray-400">
           Already have an account?{" "}
-          <Link href="/auth/login" className="text-indigo-600 hover:underline">
+          <Link href="/auth/login" className="text-green-500 hover:underline">
             Sign in
           </Link>
         </p>

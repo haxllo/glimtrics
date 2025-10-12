@@ -39,8 +39,8 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-gray-500 mt-2">
+        <h1 className="text-3xl font-bold text-white">Dashboard</h1>
+        <p className="text-gray-400 mt-2">
           Welcome back, {user?.name || "User"}! Here&apos;s your overview.
         </p>
       </div>
@@ -51,28 +51,28 @@ export default async function DashboardPage() {
           value={dashboardCount}
           description="Data files uploaded"
           icon={Upload}
-          iconColor="text-blue-600"
+          iconColor="text-green-500"
         />
         <StatsCard
           title="AI Insights"
           value={insightCount}
           description="Generated insights"
           icon={TrendingUp}
-          iconColor="text-green-600"
+          iconColor="text-green-500"
         />
         <StatsCard
           title="Active Dashboards"
           value={dashboardCount}
           description="Currently active"
           icon={BarChart3}
-          iconColor="text-purple-600"
+          iconColor="text-green-500"
         />
         <StatsCard
           title="Subscription"
           value={subscription?.plan.toUpperCase() || "FREE"}
           description={subscription?.plan === "free" ? "Upgrade for more features" : "Active plan"}
           icon={FileText}
-          iconColor="text-orange-600"
+          iconColor="text-green-500"
         />
       </div>
 
@@ -105,22 +105,22 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex items-start space-x-3">
-              <div className="flex-shrink-0 w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-semibold">
+              <div className="flex-shrink-0 w-6 h-6 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center text-sm font-semibold">
                 1
               </div>
-              <p className="text-sm text-gray-700">Upload your CSV or Excel file</p>
+              <p className="text-sm text-gray-400">Upload your CSV or Excel file</p>
             </div>
             <div className="flex items-start space-x-3">
-              <div className="flex-shrink-0 w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-semibold">
+              <div className="flex-shrink-0 w-6 h-6 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center text-sm font-semibold">
                 2
               </div>
-              <p className="text-sm text-gray-700">AI analyzes your data automatically</p>
+              <p className="text-sm text-gray-400">AI analyzes your data automatically</p>
             </div>
             <div className="flex items-start space-x-3">
-              <div className="flex-shrink-0 w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-semibold">
+              <div className="flex-shrink-0 w-6 h-6 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center text-sm font-semibold">
                 3
               </div>
-              <p className="text-sm text-gray-700">Get insights, trends, and suggestions</p>
+              <p className="text-sm text-gray-400">Get insights, trends, and suggestions</p>
             </div>
           </CardContent>
         </Card>
@@ -130,8 +130,8 @@ export default async function DashboardPage() {
         <Card className="border-dashed border-2">
           <CardContent className="flex flex-col items-center justify-center py-12">
             <Upload className="h-12 w-12 text-gray-400 mb-4" />
-            <h3 className="text-lg font-semibold mb-2">No data uploaded yet</h3>
-            <p className="text-gray-500 text-center mb-4">
+            <h3 className="text-lg font-semibold text-white mb-2">No data uploaded yet</h3>
+            <p className="text-gray-400 text-center mb-4">
               Upload your first dataset to start getting AI-powered insights
             </p>
             <Link href="/dashboard/upload">
@@ -161,14 +161,14 @@ export default async function DashboardPage() {
                   href={`/dashboard/datasets/${dashboard.id}`}
                   className="block"
                 >
-                  <div className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition">
+                  <div className="flex items-center justify-between p-4 border border-gray-800 rounded-lg hover:bg-gray-800/50 transition">
                     <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900">{dashboard.name}</h3>
-                      <p className="text-sm text-gray-500">
+                      <h3 className="font-semibold text-white">{dashboard.name}</h3>
+                      <p className="text-sm text-gray-400">
                         {data?.totalRows || 0} rows • {data?.totalColumns || 0} columns
                       </p>
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-400">
                       {new Date(dashboard.createdAt).toLocaleDateString()}
                     </div>
                   </div>

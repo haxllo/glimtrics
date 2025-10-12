@@ -27,8 +27,8 @@ export default async function DatasetsPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Datasets</h1>
-          <p className="text-gray-500 mt-2">
+          <h1 className="text-3xl font-bold text-white">Datasets</h1>
+          <p className="text-gray-400 mt-2">
             View and manage your uploaded datasets
           </p>
         </div>
@@ -41,10 +41,10 @@ export default async function DatasetsPage() {
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-16">
             <FileText className="h-16 w-16 text-gray-400 mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+            <h3 className="text-xl font-semibold text-white mb-2">
               No datasets yet
             </h3>
-            <p className="text-gray-600 text-center mb-6">
+            <p className="text-gray-400 text-center mb-6">
               Upload your first CSV or Excel file to get started
             </p>
             <Link href="/dashboard/upload">
@@ -60,7 +60,7 @@ export default async function DatasetsPage() {
             const totalColumns = data?.totalColumns || 0;
 
             return (
-              <Card key={dashboard.id} className="hover:shadow-lg transition">
+              <Card key={dashboard.id} className="bg-gray-900/50 border-gray-800 hover:border-green-500/50 transition">
                 <CardHeader>
                   <CardTitle className="line-clamp-1">{dashboard.name}</CardTitle>
                   <CardDescription className="line-clamp-2">
@@ -69,17 +69,17 @@ export default async function DatasetsPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="p-3 bg-gray-50 rounded">
-                      <p className="text-xs text-gray-600">Rows</p>
-                      <p className="text-lg font-bold text-gray-900">{totalRows}</p>
+                    <div className="p-3 bg-gray-800/50 rounded">
+                      <p className="text-xs text-gray-400">Rows</p>
+                      <p className="text-lg font-bold text-white">{totalRows}</p>
                     </div>
-                    <div className="p-3 bg-gray-50 rounded">
-                      <p className="text-xs text-gray-600">Columns</p>
-                      <p className="text-lg font-bold text-gray-900">{totalColumns}</p>
+                    <div className="p-3 bg-gray-800/50 rounded">
+                      <p className="text-xs text-gray-400">Columns</p>
+                      <p className="text-lg font-bold text-white">{totalColumns}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-400">
                     <Calendar className="h-4 w-4 mr-2" />
                     {new Date(dashboard.createdAt).toLocaleDateString()}
                   </div>
@@ -101,7 +101,7 @@ export default async function DatasetsPage() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="w-full text-red-600 hover:text-red-700 hover:bg-red-50"
+                      className="w-full text-red-500 hover:text-red-400 hover:bg-red-500/10"
                     >
                       <Trash2 className="h-4 w-4 mr-2" />
                       Delete
