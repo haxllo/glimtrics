@@ -139,6 +139,9 @@ export function LoginForm() {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col space-y-2">
+        <Link href="/auth/forgot-password" className="text-sm text-center text-green-500 hover:underline">
+          Forgot your password?
+        </Link>
         <p className="text-sm text-center text-gray-400">
           Don&apos;t have an account?{" "}
           <Link href="/auth/signup" className="text-green-500 hover:underline">

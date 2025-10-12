@@ -6,6 +6,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "./prisma";
 import bcrypt from "bcryptjs";
 import { Adapter } from "next-auth/adapters";
+import { checkRateLimit, resetRateLimit } from "@/lib/rate-limit";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
@@ -36,6 +37,14 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials");
         }
 
+        // Rate limiting check
+        const rateLimitResult = checkRateLimit(credentials.email, 5, 15 * 60 * 1000);
+        
+        if (!rateLimitResult.allowed) {
+          const minutesLeft = Math.ceil((rateLimitResult.resetTime - Date.now()) / 60000);
+          throw new Error(`Too many login attempts. Please try again in ${minutesLeft} minutes.`);
+        }
+
         const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
@@ -54,6 +63,9 @@ export const authOptions: NextAuthOptions = {
         if (!isCorrectPassword) {
           throw new Error("Invalid credentials");
         }
+
+        // Reset rate limit on successful login
+        resetRateLimit(credentials.email);
 
         return user;
       },
