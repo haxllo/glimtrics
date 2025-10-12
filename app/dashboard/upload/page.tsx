@@ -103,7 +103,15 @@ export default function UploadPage() {
               endpoint="dataFileUploader"
               onClientUploadComplete={handleUploadComplete}
               onUploadError={(error: Error) => {
+                console.error("Upload error:", error);
                 setError(error.message);
+              }}
+              onBeforeUploadBegin={(files) => {
+                console.log("Starting upload:", files);
+                return files;
+              }}
+              onUploadBegin={(name) => {
+                console.log("Upload begin:", name);
               }}
             />
             <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">

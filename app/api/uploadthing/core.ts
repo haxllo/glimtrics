@@ -13,17 +13,21 @@ export const ourFileRouter = {
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": { maxFileSize: "8MB" },
   })
     .middleware(async () => {
+      console.log("[UploadThing] Middleware called");
       const session = await getServerSession(authOptions);
+      console.log("[UploadThing] Session:", session?.user?.email);
       
       if (!session?.user?.id) {
+        console.error("[UploadThing] Unauthorized - no session");
         throw new Error("Unauthorized");
       }
 
+      console.log("[UploadThing] Authorized userId:", session.user.id);
       return { userId: session.user.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
-      console.log("Upload complete for userId:", metadata.userId);
-      console.log("file url", file.url);
+      console.log("[UploadThing] Upload complete for userId:", metadata.userId);
+      console.log("[UploadThing] File url:", file.url);
       
       return { uploadedBy: metadata.userId, url: file.url };
     }),
