@@ -99,15 +99,23 @@ export function analyzeData(data: DashboardData): AnalyticsData {
           distribution.set(key, (distribution.get(key) || 0) + 1);
         });
 
+        // Skip if too many unique values (e.g., descriptions, titles, IDs)
+        // A good category distribution should have < 50% unique values
+        const uniqueRatio = distribution.size / values.length;
+        if (uniqueRatio > 0.5 || distribution.size > 50) {
+          // Too many unique values, not useful for pie chart
+          return;
+        }
+
         const total = values.length;
         categoryDistribution[header] = Array.from(distribution.entries())
           .map(([name, count]) => ({
-            name: name.length > 50 ? name.substring(0, 50) + '...' : name, // Further truncate for display
+            name: name.length > 40 ? name.substring(0, 40) + '...' : name, // Truncate for legend
             value: count,
             percentage: (count / total) * 100,
           }))
           .sort((a, b) => b.value - a.value)
-          .slice(0, 10); // Top 10 categories
+          .slice(0, 8); // Top 8 categories for cleaner charts
       }
     }
   });
