@@ -9,7 +9,7 @@ import { fadeInUp, staggerContainer, featureCard, sectionContainer, useCaseCard 
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 via-gray-950 to-black gradient-noise">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-950 to-gray-950 gradient-noise">
       <nav className="container mx-auto px-4 py-6 flex justify-between items-center border-b border-gray-800">
         <h2 className="text-2xl font-bold text-white">AI Dashboards</h2>
         <UserNav />
