@@ -107,22 +107,27 @@ body {
     contain: paint;
   }
   
-  /* Smooth gradient with noise texture to prevent banding */
-  .gradient-noise {
+  /* Modern mesh gradient - Vercel/Stripe style */
+  .mesh-gradient {
     position: relative;
+    background: #0a0a0a;
   }
   
-  .gradient-noise::before {
+  .mesh-gradient::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+    background: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, hsla(142, 76%, 36%, 0.15), transparent 50%),
+      radial-gradient(ellipse 60% 50% at 85% 10%, hsla(217, 91%, 60%, 0.08), transparent 50%),
+      radial-gradient(ellipse 60% 50% at 10% 40%, hsla(142, 76%, 36%, 0.1), transparent 50%),
+      radial-gradient(ellipse 80% 80% at 50% 80%, hsla(0, 0%, 10%, 0.4), transparent 80%);
     pointer-events: none;
-    z-index: 1;
+    z-index: 0;
   }
   
-  .gradient-noise > * {
+  .mesh-gradient > * {
     position: relative;
-    z-index: 2;
+    z-index: 1;
   }
 }
