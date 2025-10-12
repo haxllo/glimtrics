@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "@uploadthing/react/styles.css";
+
 body {
   font-family: var(--font-geist-sans);
 }
