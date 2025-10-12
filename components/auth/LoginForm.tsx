@@ -30,13 +30,13 @@ export function LoginForm() {
 
       if (result?.error) {
         setError("Invalid email or password");
-      } else {
-        router.push("/dashboard");
-        router.refresh();
+        setIsLoading(false);
+      } else if (result?.ok) {
+        // Force reload to ensure session is properly set
+        window.location.href = "/dashboard";
       }
     } catch {
       setError("Something went wrong");
-    } finally {
       setIsLoading(false);
     }
   };

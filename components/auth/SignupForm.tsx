@@ -61,13 +61,13 @@ export function SignupForm() {
 
       if (result?.error) {
         setError("Registration succeeded but login failed");
-      } else {
-        router.push("/dashboard");
-        router.refresh();
+        setIsLoading(false);
+      } else if (result?.ok) {
+        // Force reload to ensure session is properly set
+        window.location.href = "/dashboard";
       }
     } catch (error) {
       setError(error instanceof Error ? error.message : "Something went wrong");
-    } finally {
       setIsLoading(false);
     }
   };
