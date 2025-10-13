@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="min-h-screen mesh-gradient">
       <nav className="container mx-auto px-4 py-6 flex justify-between items-center border-b border-gray-800">
-        <h2 className="text-2xl font-bold text-white">NexSight</h2>
+        <h2 className="text-2xl font-bold text-white">Glimtrics</h2>
         <UserNav />
       </nav>
 

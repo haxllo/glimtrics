@@ -58,14 +58,14 @@ No changes needed here! Just update your marketing copy.
 #### **Step 1: Google Cloud Console Setup**
 
 1. Go to https://console.cloud.google.com
-2. Create new project: "AI Dashboards"
+2. Create new project: "Glimtrics"
 3. Enable APIs: "Google+ API"
 4. Create OAuth credentials:
    - Application type: Web application
-   - Name: "AI Dashboards Production"
+   - Name: "Glimtrics Production"
    - Authorized redirect URIs:
      ```
-     https://ai-dashboard-saas.vercel.app/api/auth/callback/google
+     https://glimtrics.vercel.app/api/auth/callback/google
      ```
 5. Copy Client ID and Client Secret
 
@@ -120,8 +120,8 @@ providers: [
 
 1. Go to https://portal.azure.com
 2. Azure Active Directory → App registrations → New registration
-3. Name: "AI Dashboards"
-4. Redirect URI (Web): `https://ai-dashboard-saas.vercel.app/api/auth/callback/microsoft-entra-id`
+3. Name: "Glimtrics"
+4. Redirect URI (Web): `https://glimtrics.vercel.app/api/auth/callback/microsoft-entra-id`
 5. Copy Application (client) ID
 6. Go to "Certificates & secrets" → New client secret
 7. Copy the secret value

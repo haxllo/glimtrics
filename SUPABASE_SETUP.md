@@ -1,6 +1,6 @@
 # Supabase Database Setup Guide
 
-This guide will help you set up a free Supabase PostgreSQL database for the AI Dashboards SaaS project.
+This guide will help you set up a free Supabase PostgreSQL database for the Glimtrics project.
 
 ## Step 1: Create Supabase Account
 
@@ -13,7 +13,7 @@ This guide will help you set up a free Supabase PostgreSQL database for the AI D
 
 1. Click "New Project" in your Supabase dashboard
 2. Fill in the project details:
-   - **Name**: `ai-dashboards-saas` (or your preferred name)
+   - **Name**: `glimtrics` (or your preferred name)
    - **Database Password**: Generate a strong password (save this!)
    - **Region**: Choose the closest region to your users
    - **Pricing Plan**: Select "Free" (includes 500MB database, 1GB file storage, 2GB bandwidth)

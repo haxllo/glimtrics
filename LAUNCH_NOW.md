@@ -26,7 +26,7 @@
 
 ### **Step 1: Test Your Live App (10 minutes)**
 
-1. Go to: https://ai-dashboard-saas.vercel.app/
+1. Go to: https://glimtrics.vercel.app/
 2. Sign up with your email
 3. Upload a CSV file (any data - sales, YouTube analytics, whatever)
 4. Take 3-5 screenshots of:
@@ -65,7 +65,7 @@ After [X months/weeks] of building, I just launched my first SaaS!
 **Free plan available** (1 dataset, 5 AI insights/month)
 Pro plan: $14.99/month for unlimited everything
 
-**Try it:** https://ai-dashboard-saas.vercel.app/
+**Try it:** https://glimtrics.vercel.app/
 
 [Screenshots here]
 
@@ -98,7 +98,7 @@ Upload CSV/Excel → AI finds insights + creates charts in 30 seconds
 Built for small businesses drowning in spreadsheets 📊
 
 Free to try 👇
-https://ai-dashboard-saas.vercel.app/
+https://glimtrics.vercel.app/
 
 [Screenshots]
 
@@ -126,7 +126,7 @@ I just launched an AI tool that analyzes them automatically
 and generates insights + charts in 30 seconds.
 
 Would you be willing to try it and give me honest feedback?
-Takes 2 minutes: https://ai-dashboard-saas.vercel.app/
+Takes 2 minutes: https://glimtrics.vercel.app/
 
 No pressure if you're busy! Just looking for early feedback.
 ```
@@ -311,7 +311,7 @@ updated when it's ready - mind if I email you?"
 **Stop reading. Start doing.**
 
 **Right now (next 5 minutes):**
-1. [ ] Go to https://ai-dashboard-saas.vercel.app/
+1. [ ] Go to https://glimtrics.vercel.app/
 2. [ ] Test sign up
 3. [ ] Upload a CSV file
 4. [ ] Take 3 screenshots

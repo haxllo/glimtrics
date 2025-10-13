@@ -34,13 +34,13 @@ Paddle is a global payment platform that works in **200+ countries** including *
 2. Create two products:
 
 #### Product 1: Pro Plan
-- Name: **AI Dashboards Pro**
+- Name: **Glimtrics Pro**
 - Price: **$14.99 USD/month**
 - Billing: **Monthly recurring**
 - Copy the **Price ID**
 
 #### Product 2: Business Plan
-- Name: **AI Dashboards Business**
+- Name: **Glimtrics Business**
 - Price: **$49.99 USD/month**
 - Billing: **Monthly recurring**
 - Copy the **Price ID**

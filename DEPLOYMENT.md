@@ -1,6 +1,6 @@
 # 🚀 Vercel Deployment Guide
 
-Complete guide to deploy your AI Dashboards SaaS to production.
+Complete guide to deploy Glimtrics to production.
 
 ---
 
@@ -68,7 +68,7 @@ git push origin master
 ### **Step 3: Import Project**
 
 1. Click **"Add New"** → **"Project"**
-2. Find **"ai-dashboards-saas"** repository
+2. Find **"glimtrics"** repository
 3. Click **"Import"**
 
 ### **Step 4: Configure Build Settings**
@@ -174,13 +174,13 @@ https://your-domain.vercel.app
 ### **Add Domain in Vercel**
 
 1. Go to Project → Settings → Domains
-2. Add your domain (e.g., `aidashboards.com`)
+2. Add your domain (e.g., `glimtrics.com`)
 3. Update DNS records as instructed by Vercel
 
 ### **Update Environment Variables**
 
 ```env
-NEXTAUTH_URL=https://aidashboards.com
+NEXTAUTH_URL=https://glimtrics.com
 ```
 
 ### **Update All Services**
@@ -321,7 +321,7 @@ Use Vercel's built-in CDN (automatic)
 
 ## ✅ **Deployment Complete!**
 
-Your AI Dashboards SaaS is now live! 🎉
+Glimtrics is now live! 🎉
 
 **Next Steps:**
 1. Share your app link

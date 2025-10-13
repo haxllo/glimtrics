@@ -10,7 +10,7 @@ import { ourFileRouter } from "@/app/api/uploadthing/core";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NexSight",
+  title: "Glimtrics",
   description: "AI-powered analytics dashboard for small businesses and creators",
 };
 

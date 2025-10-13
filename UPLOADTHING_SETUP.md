@@ -13,7 +13,7 @@ This project uses UploadThing v7+ SDK for file uploads with the free tier, which
 ### 2. Create a New App
 
 1. Click "Create App" in the UploadThing dashboard
-2. Give your app a name (e.g., "AI Dashboards SaaS")
+2. Give your app a name (e.g., "Glimtrics")
 3. Select the free tier
 
 ### 3. Get Your API Token

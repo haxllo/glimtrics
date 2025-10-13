@@ -1,6 +1,6 @@
-# AI Dashboards SaaS
+# Glimtrics
 
-An AI-powered analytics dashboard for small businesses and creators that provides insights, trends, and actionable suggestions from their data.
+Glimtrics is an AI-powered analytics dashboard for small businesses and creators that provides insights, trends, and actionable suggestions from their data.
 
 ## Features
 
@@ -77,7 +77,7 @@ Open [http://localhost:3000](http://localhost:3000) to see the application.
 ## Project Structure
 
 ```
-ai-dashboards-saas/
+glimtrics/
 ├── app/                    # Next.js app directory
 │   ├── api/               # API routes
 │   ├── dashboard/         # Dashboard pages

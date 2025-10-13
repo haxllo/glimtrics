@@ -45,7 +45,7 @@
 **Steps:**
 1. Go to https://vercel.com
 2. Sign up with GitHub
-3. Import `ai-dashboards-saas` repository
+3. Import `glimtrics` repository
 4. Add all environment variables (see DEPLOYMENT.md)
 5. Deploy!
 

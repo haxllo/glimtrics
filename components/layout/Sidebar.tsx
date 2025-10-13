@@ -61,7 +61,7 @@ export function Sidebar() {
       <div className="px-3 py-2 flex-1">
         <Link href="/dashboard" className="flex items-center pl-3 mb-14 group">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent group-hover:from-green-500 group-hover:to-green-400 transition-all">
-            NexSight
+            Glimtrics
           </h1>
         </Link>
         <div className="space-y-1">

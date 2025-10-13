@@ -1,6 +1,6 @@
 # NextAuth.js Setup Guide
 
-This guide explains how to configure authentication for the AI Dashboards SaaS application.
+This guide explains how to configure authentication for the Glimtrics application.
 
 ## Quick Start
 
@@ -60,7 +60,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 1. Go to [GitHub Developer Settings](https://github.com/settings/developers)
 2. Click "New OAuth App"
 3. Fill in:
-   - **Application name**: AI Dashboards SaaS
+   - **Application name**: Glimtrics
    - **Homepage URL**: `http://localhost:3000`
    - **Authorization callback URL**: `http://localhost:3000/api/auth/callback/github`
 4. Click "Register application"

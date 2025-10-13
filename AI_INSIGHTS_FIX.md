@@ -190,7 +190,7 @@ IMPORTANT INSTRUCTIONS:
 
 ### **1. Upload a CSV to your app**
 
-Go to: https://ai-dashboard-saas.vercel.app/dashboard/upload
+Go to: https://glimtrics.vercel.app/dashboard/upload
 
 Upload one of your CSV files:
 - `E:\csv\player_stats.csv`

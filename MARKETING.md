@@ -33,7 +33,7 @@
    **TODAY (Next 2 Hours):**
 
    Task 1: Test Your Own Product
-   1. Go to https://ai-dashboard-saas.vercel.app/
+   1. Go to https://glimtrics.vercel.app/
    2. Sign up yourself
    3. Upload a sample CSV (sales data, YouTube analytics, anything)
    4. Screenshot the AI insights it generates
@@ -57,7 +57,7 @@
 
      I spent 2 months building this. Would love feedback!
 
-     Try it: https://ai-dashboard-saas.vercel.app/
+     Try it: https://glimtrics.vercel.app/
 
      [Include your 3 best screenshots here]
 
@@ -80,7 +80,7 @@
      Built for small businesses drowning in spreadsheets
 
      Free to try 👇
-     https://ai-dashboard-saas.vercel.app/
+     https://glimtrics.vercel.app/
 
      [Screenshots]
 
@@ -103,7 +103,7 @@
      find insights automatically. Would you be willing to try
      it and give me honest feedback?
 
-     Takes 2 minutes: https://ai-dashboard-saas.vercel.app/
+     Takes 2 minutes: https://glimtrics.vercel.app/
 
      No pressure if you're busy!
 
