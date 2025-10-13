@@ -1,11 +1,96 @@
-"use client";
-
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { UserNav } from "@/components/layout/UserNav";
 import { BarChart3, TrendingUp, Upload, Zap } from "lucide-react";
-import { motion } from "framer-motion";
-import { fadeInUp, staggerContainer, featureCard, sectionContainer, useCaseCard } from "@/lib/animations";
+import { HeroSection } from "@/components/home/HeroSection";
+import { ScrollFade } from "@/components/home/ScrollFade";
+
+const features = [
+  {
+    title: "Easy Upload",
+    description: "CSV, Excel (.xlsx, .xls) - Upload in seconds",
+    icon: Upload,
+    accent: "text-green-500",
+  },
+  {
+    title: "AI Analysis",
+    description: "Automatic trend detection and insights",
+    icon: Zap,
+    accent: "text-yellow-500",
+  },
+  {
+    title: "Beautiful Charts",
+    description: "Interactive visualizations for your data",
+    icon: BarChart3,
+    accent: "text-blue-500",
+  },
+  {
+    title: "Actionable Insights",
+    description: "Get suggestions to improve your business",
+    icon: TrendingUp,
+    accent: "text-green-500",
+  },
+];
+
+const howItWorks = [
+  {
+    label: "1",
+    title: "Upload Your Data",
+    description: "Drop your CSV or Excel file. We support any tabular data format.",
+  },
+  {
+    label: "2",
+    title: "AI Analyzes Everything",
+    description: "Our AI automatically detects patterns, trends, and anomalies in seconds.",
+  },
+  {
+    label: "3",
+    title: "Get Insights & Charts",
+    description: "View interactive charts, statistics, and actionable recommendations.",
+  },
+];
+
+const useCases = [
+  {
+    icon: "📊",
+    title: "Small Businesses",
+    description: "Track sales, inventory, and customer data",
+  },
+  {
+    icon: "📈",
+    title: "Content Creators",
+    description: "Analyze engagement and growth metrics",
+  },
+  {
+    icon: "🎓",
+    title: "Students & Researchers",
+    description: "Visualize survey and experiment data",
+  },
+  {
+    icon: "💼",
+    title: "Freelancers",
+    description: "Monitor projects and client metrics",
+  },
+];
+
+const faqs = [
+  {
+    question: "What file formats do you support?",
+    answer: "We support CSV and Excel files (.xlsx, .xls). Any tabular data works!",
+  },
+  {
+    question: "How does the AI analysis work?",
+    answer: "We use GPT-4 to analyze your data, detect patterns, identify trends, and provide actionable insights automatically.",
+  },
+  {
+    question: "Is my data secure?",
+    answer: "Yes! Your data is encrypted and stored securely. We never share your data with third parties.",
+  },
+  {
+    question: "Can I export my insights?",
+    answer: "Absolutely! Export your charts and insights as PDF or CSV files anytime.",
+  },
+];
 
 export default function Home() {
   return (
@@ -15,220 +100,93 @@ export default function Home() {
         <UserNav />
       </nav>
 
-      <main className="container mx-auto px-4 py-16">
-        <motion.div 
-          className="text-center max-w-4xl mx-auto"
-          initial="initial"
-          animate="animate"
-          variants={staggerContainer}
-        >
-          {/* HERO SECTION - GPU accelerated, snappy animations */}
-          <motion.h1 
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 gpu-accelerated"
-            variants={fadeInUp}
-          >
-            Turn Your CSV & Excel Files Into
-            <span className="text-green-500"> AI-Powered Insights</span>
-          </motion.h1>
-          <motion.p 
-            className="text-lg sm:text-xl text-gray-400 mb-12 max-w-2xl mx-auto px-4 gpu-accelerated"
-            variants={fadeInUp}
-          >
-            Upload your spreadsheets (CSV or Excel) and instantly get AI-generated insights, interactive charts, and trend analysis. No setup, no learning curve.
-          </motion.p>
-          <motion.div 
-            className="flex flex-col sm:flex-row justify-center gap-4 mb-16 px-4 gpu-accelerated"
-            variants={fadeInUp}
-          >
-            <Link href="/auth/signup" className="w-full sm:w-auto">
-              <Button size="lg" className="w-full sm:w-auto px-8 py-6 text-lg">
-                Get Started Free
+      <main className="container mx-auto px-4 py-16 space-y-20">
+        <HeroSection />
+
+        <ScrollFade className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+          {features.map(({ title, description, icon: Icon, accent }) => (
+            <article
+              key={title}
+              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center"
+            >
+              <Icon className={`h-10 w-10 mb-4 mx-auto ${accent}`} />
+              <h3 className="font-semibold text-lg mb-2 text-white">{title}</h3>
+              <p className="text-gray-400 text-sm">{description}</p>
+            </article>
+          ))}
+        </ScrollFade>
+
+        <section className="px-4">
+          <ScrollFade delay={0.1} className="text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-12 text-white">How It Works</h2>
+          </ScrollFade>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {howItWorks.map(({ label, title, description }) => (
+              <ScrollFade key={label} delay={0.1} className="text-center">
+                <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-3xl font-bold text-green-500">{label}</span>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
+                <p className="text-gray-400">{description}</p>
+              </ScrollFade>
+            ))}
+          </div>
+        </section>
+
+        <section className="px-4">
+          <ScrollFade delay={0.1} className="text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white">Perfect For</h2>
+          </ScrollFade>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {useCases.map(({ icon, title, description }) => (
+              <ScrollFade
+                key={title}
+                delay={0.1}
+                className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center"
+              >
+                <div className="text-3xl mb-3">{icon}</div>
+                <h3 className="font-semibold text-white mb-2">{title}</h3>
+                <p className="text-sm text-gray-400">{description}</p>
+              </ScrollFade>
+            ))}
+          </div>
+        </section>
+
+        <section className="px-4 max-w-3xl mx-auto">
+          <ScrollFade delay={0.1} className="text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white">
+              Frequently Asked Questions
+            </h2>
+          </ScrollFade>
+          <div className="space-y-4">
+            {faqs.map(({ question, answer }) => (
+              <ScrollFade
+                key={question}
+                delay={0.1}
+                className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg"
+              >
+                <h3 className="font-semibold text-white mb-2">{question}</h3>
+                <p className="text-gray-400">{answer}</p>
+              </ScrollFade>
+            ))}
+          </div>
+        </section>
+
+        <ScrollFade delay={0.1} className="p-8 bg-gray-900/50 border border-gray-800 rounded-lg mx-4 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-white">Simple Pricing</h2>
+          <p className="text-gray-400 mb-6">Start free, upgrade when you need more</p>
+          <div className="inline-block">
+            <div className="text-3xl sm:text-4xl font-bold text-green-500">Free - $49.99/mo</div>
+            <p className="text-gray-400 mt-2">Plans for every need</p>
+          </div>
+          <div className="mt-6">
+            <Link href="/pricing">
+              <Button variant="outline" className="border-green-500 text-green-500 hover:bg-green-500/10">
+                View All Plans
               </Button>
             </Link>
-            <Link href="/auth/login" className="w-full sm:w-auto">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto px-8 py-6 text-lg">
-                Sign In
-              </Button>
-            </Link>
-          </motion.div>
-
-          {/* FEATURE CARDS - Scroll-triggered with stagger */}
-          <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-16 px-4"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-          >
-            <motion.div 
-              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated"
-              variants={featureCard}
-              whileHover="whileHover"
-            >
-              <Upload className="h-10 w-10 text-green-500 mb-4 mx-auto" />
-              <h3 className="font-semibold text-lg mb-2 text-white">Easy Upload</h3>
-              <p className="text-gray-400 text-sm">
-                CSV, Excel (.xlsx, .xls) - Upload in seconds
-              </p>
-            </motion.div>
-            <motion.div 
-              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated"
-              variants={featureCard}
-              whileHover="whileHover"
-            >
-              <Zap className="h-10 w-10 text-yellow-500 mb-4 mx-auto" />
-              <h3 className="font-semibold text-lg mb-2 text-white">AI Analysis</h3>
-              <p className="text-gray-400 text-sm">
-                Automatic trend detection and insights
-              </p>
-            </motion.div>
-            <motion.div 
-              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated"
-              variants={featureCard}
-              whileHover="whileHover"
-            >
-              <BarChart3 className="h-10 w-10 text-blue-500 mb-4 mx-auto" />
-              <h3 className="font-semibold text-lg mb-2 text-white">Beautiful Charts</h3>
-              <p className="text-gray-400 text-sm">
-                Interactive visualizations for your data
-              </p>
-            </motion.div>
-            <motion.div 
-              className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated"
-              variants={featureCard}
-              whileHover="whileHover"
-            >
-              <TrendingUp className="h-10 w-10 text-green-500 mb-4 mx-auto" />
-              <h3 className="font-semibold text-lg mb-2 text-white">Actionable Insights</h3>
-              <p className="text-gray-400 text-sm">
-                Get suggestions to improve your business
-              </p>
-            </motion.div>
-          </motion.div>
-
-          {/* HOW IT WORKS - Scroll-triggered with stagger */}
-          <motion.div 
-            className="mt-20 px-4 gpu-accelerated"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={sectionContainer}
-          >
-            <h2 className="text-2xl sm:text-3xl font-bold mb-12 text-white text-center">How It Works</h2>
-            <motion.div 
-              className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto"
-              variants={staggerContainer}
-            >
-              <motion.div className="text-center gpu-accelerated" variants={useCaseCard}>
-                <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-3xl font-bold text-green-500">1</span>
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Upload Your Data</h3>
-                <p className="text-gray-400">Drop your CSV or Excel file. We support any tabular data format.</p>
-              </motion.div>
-              <motion.div className="text-center gpu-accelerated" variants={useCaseCard}>
-                <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-3xl font-bold text-green-500">2</span>
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-2">AI Analyzes Everything</h3>
-                <p className="text-gray-400">Our AI automatically detects patterns, trends, and anomalies in seconds.</p>
-              </motion.div>
-              <motion.div className="text-center gpu-accelerated" variants={useCaseCard}>
-                <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-3xl font-bold text-green-500">3</span>
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Get Insights & Charts</h3>
-                <p className="text-gray-400">View interactive charts, statistics, and actionable recommendations.</p>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-
-          {/* USE CASES - Scroll-triggered with stagger */}
-          <motion.div 
-            className="mt-20 px-4 gpu-accelerated"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={sectionContainer}
-          >
-            <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white text-center">Perfect For</h2>
-            <motion.div 
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
-              variants={staggerContainer}
-            >
-              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center gpu-accelerated" variants={useCaseCard}>
-                <div className="text-3xl mb-3">📊</div>
-                <h3 className="font-semibold text-white mb-2">Small Businesses</h3>
-                <p className="text-sm text-gray-400">Track sales, inventory, and customer data</p>
-              </motion.div>
-              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center gpu-accelerated" variants={useCaseCard}>
-                <div className="text-3xl mb-3">📈</div>
-                <h3 className="font-semibold text-white mb-2">Content Creators</h3>
-                <p className="text-sm text-gray-400">Analyze engagement and growth metrics</p>
-              </motion.div>
-              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center gpu-accelerated" variants={useCaseCard}>
-                <div className="text-3xl mb-3">🎓</div>
-                <h3 className="font-semibold text-white mb-2">Students & Researchers</h3>
-                <p className="text-sm text-gray-400">Visualize survey and experiment data</p>
-              </motion.div>
-              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg text-center gpu-accelerated" variants={useCaseCard}>
-                <div className="text-3xl mb-3">💼</div>
-                <h3 className="font-semibold text-white mb-2">Freelancers</h3>
-                <p className="text-sm text-gray-400">Monitor projects and client metrics</p>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-
-          {/* FAQ - Scroll-triggered with stagger */}
-          <motion.div 
-            className="mt-20 px-4 max-w-3xl mx-auto gpu-accelerated"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={sectionContainer}
-          >
-            <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white text-center">Frequently Asked Questions</h2>
-            <motion.div className="space-y-4" variants={staggerContainer}>
-              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated" variants={useCaseCard}>
-                <h3 className="font-semibold text-white mb-2">What file formats do you support?</h3>
-                <p className="text-gray-400">We support CSV and Excel files (.xlsx, .xls). Any tabular data works!</p>
-              </motion.div>
-              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated" variants={useCaseCard}>
-                <h3 className="font-semibold text-white mb-2">How does the AI analysis work?</h3>
-                <p className="text-gray-400">We use GPT-4 to analyze your data, detect patterns, identify trends, and provide actionable insights automatically.</p>
-              </motion.div>
-              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated" variants={useCaseCard}>
-                <h3 className="font-semibold text-white mb-2">Is my data secure?</h3>
-                <p className="text-gray-400">Yes! Your data is encrypted and stored securely. We never share your data with third parties.</p>
-              </motion.div>
-              <motion.div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg gpu-accelerated" variants={useCaseCard}>
-                <h3 className="font-semibold text-white mb-2">Can I export my insights?</h3>
-                <p className="text-gray-400">Absolutely! Export your charts and insights as PDF or CSV files anytime.</p>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-
-          {/* PRICING CTA - Scroll-triggered, NO backdrop-blur */}
-          <motion.div 
-            className="mt-20 p-8 bg-gray-900/50 border border-gray-800 rounded-lg mx-4 gpu-accelerated"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={sectionContainer}
-          >
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-white">Simple Pricing</h2>
-            <p className="text-gray-400 mb-6">Start free, upgrade when you need more</p>
-            <div className="inline-block">
-              <div className="text-3xl sm:text-4xl font-bold text-green-500">Free - $49.99/mo</div>
-              <p className="text-gray-400 mt-2">Plans for every need</p>
-            </div>
-            <div className="mt-6">
-              <Link href="/pricing">
-                <Button variant="outline" className="border-green-500 text-green-500 hover:bg-green-500/10">View All Plans</Button>
-              </Link>
-            </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </ScrollFade>
       </main>
     </div>
   );

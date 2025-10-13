@@ -14,27 +14,26 @@ export default async function DashboardPage() {
     return <div>Please log in to access the dashboard.</div>;
   }
 
-  const dashboardCount = await prisma.dashboard.count({
-    where: { userId: user.id },
-  });
-
-  const insightCount = await prisma.insight.count({
-    where: {
-      dashboard: {
-        userId: user.id,
+  const [dashboardCount, insightCount, subscription, recentDashboards] = await Promise.all([
+    prisma.dashboard.count({
+      where: { userId: user.id },
+    }),
+    prisma.insight.count({
+      where: {
+        dashboard: {
+          userId: user.id,
+        },
       },
-    },
-  });
-
-  const subscription = await prisma.subscription.findUnique({
-    where: { userId: user.id },
-  });
-
-  const recentDashboards = await prisma.dashboard.findMany({
-    where: { userId: user.id },
-    orderBy: { createdAt: "desc" },
-    take: 3,
-  });
+    }),
+    prisma.subscription.findUnique({
+      where: { userId: user.id },
+    }),
+    prisma.dashboard.findMany({
+      where: { userId: user.id },
+      orderBy: { createdAt: "desc" },
+      take: 3,
+    }),
+  ]);
 
   return (
     <div className="space-y-8">

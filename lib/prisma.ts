@@ -1,25 +1,41 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
-const prismaClientSingleton = () => {
-  return new PrismaClient({
-    log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
-    datasources: {
-      db: {
-        url: process.env.DATABASE_URL,
-      },
-    },
-  });
+type PrismaGlobal = {
+  prisma?: PrismaClient;
 };
 
-declare const globalThis: {
-  prismaGlobal: ReturnType<typeof prismaClientSingleton>;
-} & typeof global;
+const globalForPrisma = globalThis as typeof globalThis & PrismaGlobal;
 
-const prisma = globalThis.prismaGlobal ?? prismaClientSingleton();
+const getPrismaClient = () => {
+  if (!process.env.DATABASE_URL) {
+    throw new Error("DATABASE_URL env variable is not set");
+  }
 
-export default prisma;
+  if (!globalForPrisma.prisma) {
+    globalForPrisma.prisma = new PrismaClient({
+      log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
+      datasources: {
+        db: {
+          url: process.env.DATABASE_URL,
+        },
+      },
+    });
+  }
 
-if (process.env.NODE_ENV !== 'production') globalThis.prismaGlobal = prisma;
+  return globalForPrisma.prisma;
+};
 
-// Export as named export for convenience
-export { prisma };
+const prismaProxy = new Proxy({} as PrismaClient, {
+  get(_target, prop, receiver) {
+    if (prop === "then") {
+      return undefined;
+    }
+
+    const client = getPrismaClient();
+    const value = Reflect.get(client, prop, receiver);
+    return typeof value === "function" ? value.bind(client) : value;
+  },
+});
+
+export const prisma = prismaProxy;
+export default prismaProxy;

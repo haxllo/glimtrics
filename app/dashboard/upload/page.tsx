@@ -99,7 +99,7 @@ export default function UploadPage() {
             </CardDescription>
             <div className="pt-2">
               <p className="text-sm text-green-500 font-medium">
-                📊 Supported: CSV (.csv), Excel (.xlsx, .xls), JSON (.json)
+                Supported: CSV (.csv), Excel (.xlsx, .xls), JSON (.json)
               </p>
             </div>
           </CardHeader>
