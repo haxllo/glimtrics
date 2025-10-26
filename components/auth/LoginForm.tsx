@@ -41,17 +41,6 @@ export function LoginForm() {
     }
   };
 
-  const handleOAuthSignIn = async (provider: "google" | "github") => {
-    setIsLoading(true);
-    try {
-      await signIn(provider, { callbackUrl: "/dashboard" });
-    } catch {
-      setError("OAuth sign in failed");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <Card className="w-full max-w-md bg-gray-900/50 border-gray-800">
       <CardHeader>

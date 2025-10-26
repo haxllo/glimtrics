@@ -145,7 +145,6 @@ export default function AnalyticsPage({
     if (!dashboard) return;
 
     try {
-      const dashboardData = dashboard.data as unknown as DashboardData;
       exportToCSV(filteredData, `${sanitizeFilename(dashboard.name)}-data-${getCurrentDateForFilename()}.csv`);
       toast.success("CSV exported successfully");
     } catch (error) {

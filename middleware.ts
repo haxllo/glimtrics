@@ -69,10 +69,6 @@ function getClientIdentifier(request: NextRequest): string {
     }
   }
 
-  if (request.ip) {
-    return request.ip;
-  }
-
   return "unknown";
 }
 

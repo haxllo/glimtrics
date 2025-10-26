@@ -176,6 +176,7 @@ Provide exactly 5 insights. Return ONLY the JSON object.`;
           throw new Error('No valid JSON found in response');
         }
       } catch (secondError) {
+        console.error('[OpenAI] Regex recovery parse error:', secondError);
         throw new Error('Failed to parse AI response as JSON. The AI returned invalid format.');
       }
     }

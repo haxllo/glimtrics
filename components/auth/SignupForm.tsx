@@ -25,8 +25,6 @@ export function SignupForm() {
     hasSpecial: /[!@#$%^&*(),.?":{}|<>]/.test(password),
   };
 
-  const isPasswordStrong = passwordStrength.hasLength && passwordStrength.hasNumber;
-
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -77,17 +75,6 @@ export function SignupForm() {
       }
     } catch (error) {
       setError(error instanceof Error ? error.message : "Something went wrong");
-      setIsLoading(false);
-    }
-  };
-
-  const handleOAuthSignIn = async (provider: "google" | "github") => {
-    setIsLoading(true);
-    try {
-      await signIn(provider, { callbackUrl: "/dashboard" });
-    } catch {
-      setError("OAuth sign in failed");
-    } finally {
       setIsLoading(false);
     }
   };
