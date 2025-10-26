@@ -141,7 +141,7 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="min-h-screen mesh-gradient py-12 px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white mb-4">
@@ -231,6 +231,10 @@ export default function PricingPage() {
                 </ul>
               </CardContent>
               <CardFooter>
+                {(() => {
+                  const currentPriceId = billingCycle === 'monthly' ? plan.monthlyPriceId : plan.annualPriceId;
+                  const isLoading = loadingPriceId !== null && loadingPriceId === currentPriceId;
+                  return (
                 <Button
                   onClick={() => handleSubscribe(plan)}
                   disabled={loadingPriceId !== null}
@@ -241,7 +245,7 @@ export default function PricingPage() {
                   }`}
                   variant={plan.popular ? "default" : "outline"}
                 >
-                  {loadingPriceId === (billingCycle === 'monthly' ? plan.monthlyPriceId : plan.annualPriceId) ? (
+                  {isLoading ? (
                     <>
                       <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                       Loading...
@@ -252,6 +256,8 @@ export default function PricingPage() {
                     "Subscribe Now"
                   )}
                 </Button>
+                  );
+                })()}
               </CardFooter>
             </Card>
             </motion.div>

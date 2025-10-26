@@ -94,13 +94,13 @@ const faqs = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen mesh-gradient">
-      <nav className="container mx-auto px-4 py-6 flex justify-between items-center border-b border-gray-800">
+    <div className="relative min-h-screen text-white">
+      <nav className="container mx-auto px-4 py-6 flex justify-between items-center border-b border-white/10">
         <h2 className="text-2xl font-bold text-white">Glimtrics</h2>
         <UserNav />
       </nav>
 
-      <main className="container mx-auto px-4 py-16 space-y-20">
+      <main className="relative z-10 container mx-auto px-4 py-16 space-y-20">
         <HeroSection />
 
         <ScrollFade className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">

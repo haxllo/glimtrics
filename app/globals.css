@@ -106,16 +106,4 @@ body {
     /* Limit blur area to improve performance */
     contain: paint;
   }
-  
-  /* Custom SVG gradient background */
-  .mesh-gradient {
-    position: relative;
-    background: #0a0a0a url('/gradient-deep-navy-&-purple-2560x1440.svg') no-repeat center center;
-    background-size: cover;
-  }
-  
-  .mesh-gradient > * {
-    position: relative;
-    z-index: 2;
-  }
 }

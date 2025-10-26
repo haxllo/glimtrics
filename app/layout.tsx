@@ -6,6 +6,7 @@ import { ToastProvider } from "@/components/providers/ToastProvider";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
+import GradientBackdrop from "@/components/ui/GradientBackdrop";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,20 +22,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="preload"
-          href="/gradient-deep-navy-&-purple-2560x1440.svg"
-          as="image"
-          type="image/svg+xml"
-        />
-      </head>
       <body className={inter.className}>
-        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-        <SessionProvider>
-          <ToastProvider />
-          {children}
-        </SessionProvider>
+        <GradientBackdrop />
+        <div className="relative z-10 min-h-screen overflow-hidden text-white">
+          <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+          <SessionProvider>
+            <ToastProvider />
+            <div className="relative z-10 min-h-screen">
+              {children}
+            </div>
+          </SessionProvider>
+        </div>
       </body>
     </html>
   );
