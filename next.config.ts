@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   // Suppress hydration warnings caused by browser extensions (password managers, etc.)
   reactStrictMode: true,
 
+  experimental: {
+    serverComponentsExternalPackages: ["bullmq", "ioredis"],
+  },
+
   async headers() {
     return [
       {

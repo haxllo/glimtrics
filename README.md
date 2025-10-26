@@ -16,17 +16,19 @@ Glimtrics is an AI-powered analytics dashboard for small businesses and creators
 
 ## Tech Stack
 
-- **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS, shadcn/ui, Framer Motion
-- **Backend**: Next.js API Routes, Prisma ORM
-- **Database**: Supabase (PostgreSQL)
-- **Authentication**: NextAuth.js
-- **AI**: OpenAI GPT-4
-- **Charts**: Recharts
-- **File Upload**: UploadThing (Free tier for MVP)
-- **File Parsing**: PapaParse
-- **PDF Export**: jsPDF
-- **Payments**: Stripe
-- **Deployment**: Vercel
+| Category | Technologies |
+| --- | --- |
+| Application Framework | [Next.js 15](https://nextjs.org/) (App Router) · [React 19](https://react.dev/) · [TypeScript](https://www.typescriptlang.org/) |
+| UI & Styling | [Tailwind CSS](https://tailwindcss.com/) · [tailwindcss-animate](https://github.com/jamiebuilds/tailwindcss-animate) · [class-variance-authority](https://github.com/joe-bell/cva) · [Radix UI](https://www.radix-ui.com/) (shadcn/ui) · [Framer Motion](https://www.framer.com/motion/) · [lucide-react](https://lucide.dev/) · [Sonner](https://sonner.emilkowal.ski/) |
+| Data & Analytics | Custom analytics utilities · [Recharts](https://recharts.org/en-US/) · [html2canvas](https://html2canvas.hertzen.com/) · [jsPDF](https://github.com/parallax/jsPDF) · [SheetJS](https://sheetjs.com/) (XLSX) · [PapaParse](https://www.papaparse.com/) |
+| Backend Services | Next.js Route Handlers · [Prisma ORM](https://www.prisma.io/) · [Auth.js Prisma Adapter](https://authjs.dev/reference/adapter/prisma) · [bcryptjs](https://github.com/dcodeIO/bcrypt.js) |
+| Database | [PostgreSQL](https://www.postgresql.org/) (Supabase-compatible) |
+| Authentication | [NextAuth.js](https://next-auth.js.org/) |
+| AI & Automation | [OpenAI Node SDK](https://www.npmjs.com/package/openai) · [BullMQ](https://docs.bullmq.io/) · [ioredis](https://github.com/redis/ioredis) |
+| File & Asset Handling | [UploadThing](https://uploadthing.com/) |
+| Billing | [Paddle JS](https://developer.paddle.com/paddle-checkout/reference/js-buy-sdk) · [Paddle Node SDK](https://developer.paddle.com/reference/paddle-sdk) |
+| Tooling | [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client) · [ESLint 9](https://eslint.org/) · [eslint-config-next](https://nextjs.org/docs/app/building-your-application/configuring/eslint) · [PostCSS](https://postcss.org/) · [Autoprefixer](https://github.com/postcss/autoprefixer) · [TypeScript 5](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html) |
+| Deployment Target | [Vercel](https://vercel.com/) |
 
 ## Getting Started
 
